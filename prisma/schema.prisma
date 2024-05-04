@@ -9,7 +9,7 @@ datasource db {
 
 model BdateInfo {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  bdate       DateTime
+  bdate       String
   name        String
   tag         String
   userId      String
