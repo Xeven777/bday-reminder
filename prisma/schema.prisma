@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model BdateInfo {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  bdate       DateTime
+  name        String
+  tag         String
+  userId      String
+  friendEmail String?
+  autosend    Boolean?
+  createdAt   DateTime @default(now())
+
+  @@map("bdayInfo")
+}
