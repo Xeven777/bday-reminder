@@ -2,22 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
-  File,
   Home,
   LineChart,
-  ListFilter,
-  MoreVertical,
   Package,
   Package2,
   PanelLeft,
   Search,
   Settings,
-  ShoppingCart,
-  Truck,
+  Cake,
   Users2,
 } from "lucide-react";
 
@@ -98,7 +90,7 @@ export default function RootLayout({
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <ShoppingCart className="h-5 w-5" />
+                <Cake className="h-5 w-5" />
                 <span className="sr-only">Orders</span>
               </Link>
             </TooltipTrigger>
@@ -185,7 +177,7 @@ export default function RootLayout({
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-foreground"
                 >
-                  <ShoppingCart className="h-5 w-5" />
+                  <Cake className="h-5 w-5" />
                   Orders
                 </Link>
                 <Link

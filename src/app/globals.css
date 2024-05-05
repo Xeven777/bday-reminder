@@ -1,7 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::selection {
+  background-color: #6c1ba5;
+  color: #fff;
+}
 
 @layer base {
   :root {
@@ -69,4 +74,25 @@
 .bric {
   font-family: "Bricolage Grotesque", sans-serif;
   font-optical-sizing: auto;
+}
+
+.glow-text {
+  text-shadow: rgba(145, 87, 183, 0.8) 1px 2px 8px;
+}
+
+.glow {
+  box-shadow: 0 0 12px rgba(174, 73, 241, 0.56);
+}
+
+.glow-card {
+  box-shadow: 0 0 20px rgba(80, 35, 110, 0.4);
+}
+
+::-webkit-scrollbar{
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #35164b;
+  border-radius: 4px;
 }
