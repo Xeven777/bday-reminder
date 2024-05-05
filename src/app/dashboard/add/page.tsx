@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -11,20 +11,58 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { use, useState } from "react";
+import { toast } from "sonner";
+import { InfoIcon } from "lucide-react";
 
 const Page = () => {
-  const [autosend, setAutosend] = useState(false);
+  const router = useRouter();
+  const [autosend, setAutosend] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
   const [email, setEmail] = useState("");
   const [tag, setTag] = useState("");
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    console.log(name, day, month, year, email, tag, autosend);
 
+    try {
+      const birthdayString = `${month}/${day}/${year}`;
+      const birthday = new Date(birthdayString);
+      console.log(birthday, birthdayString);
+      // const response = await fetch("/api/addbd", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     name,
+      //     birthday,
+      //     email,
+      //     tag,
+      //     autosend,
+      //   }),
+      // });
+      // if (response.ok) {
+      //   toast.success("Reminder added successfully");
+      //   router.push("/dashboard");
+      // }
+    } catch (error) {
+      toast.error("An error occurred. Please try again later.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <div className="flex flex-col gap-2 justify-center mx-auto items-center">
       <div className="w-full max-w-md rounded-lg bg-card p-6 shadow-purple-800/30 transition-all shadow-inner">
         <h1 className="bric mb-4 text-3xl font-bold">Add Birthday Reminder</h1>
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={(e) => handleSubmit(e)}>
           <div>
             <label
               className="mb-2 block text-sm font-medium text-muted-foreground"
@@ -34,6 +72,8 @@ const Page = () => {
             </label>
             <Input
               id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Enter the person's name"
               required
               type="text"
@@ -48,7 +88,16 @@ const Page = () => {
               >
                 Day
               </label>
-              <Input id="day" max="31" min="1" placeholder="7" type="number" />
+              <Input
+                value={day}
+                onChange={(e) => setDay(e.target.value)}
+                required
+                id="day"
+                max="31"
+                min="1"
+                placeholder="7"
+                type="number"
+              />
             </div>
 
             <div>
@@ -58,9 +107,9 @@ const Page = () => {
               >
                 Month
               </label>
-              <Select autoComplete="december">
+              <Select required value={month} onValueChange={setMonth}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select" />
+                  <SelectValue placeholder="Month" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
@@ -89,6 +138,9 @@ const Page = () => {
                 Year
               </label>
               <Input
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                required
                 id="year"
                 max="2024"
                 min="1900"
@@ -97,11 +149,31 @@ const Page = () => {
               />
             </div>
           </div>
-          <Switch
-            id="autosend"
-            checked={autosend}
-            onCheckedChange={setAutosend}
-          />
+
+          <Select required value={tag} onValueChange={setTag}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select a tag" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="Friend">Friend</SelectItem>
+                <SelectItem value="Family">Family</SelectItem>
+                <SelectItem value="Colleague">Colleague</SelectItem>
+                <SelectItem value="Love">Love</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
+          <div className="inline-flex gap-2">
+            <Switch
+              id="autosend"
+              checked={autosend}
+              onCheckedChange={setAutosend}
+            />
+            Auto-Send emails to them
+          </div>
+
           <div>
             <label
               className="mb-2 block text-sm font-medium text-muted-foreground"
@@ -109,13 +181,23 @@ const Page = () => {
             >
               Email
             </label>
-            <Input id="email" placeholder="Their Email " type="email" />
-            <p className="text-xs text-muted-foreground">
-              This is the email where we will send the birthday wish. Make sure
-              to fill it correctly.
+            <Input
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Their Email "
+              type="email"
+              required={autosend}
+            />
+            <p className="text-xs text-muted-foreground pt-2 inline-flex">
+              <InfoIcon size={14} className="mr-1 pt-0.5" /> This is the email
+              where we will send the birthday wish to the person. Make sure to
+              fill it correctly.
             </p>
           </div>
-          <Button>Add Reminder</Button>
+          <Button disabled={loading} type="submit">
+            Add Reminder
+          </Button>
         </form>
       </div>
     </div>
