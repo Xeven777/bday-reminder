@@ -76,7 +76,6 @@ const AiForm = () => {
             <SelectItem value="Funny">Funny</SelectItem>
             <SelectItem value="Formal">Formal</SelectItem>
             <SelectItem value="Professional">Professional</SelectItem>
-            {/* <SelectItem value="in love">Love</SelectItem> */}
             <SelectItem value="Sarcastic">Sarcastic</SelectItem>
             <SelectItem value="Unique and Creative">
               Unique and Creative

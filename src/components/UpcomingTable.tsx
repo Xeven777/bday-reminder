@@ -18,36 +18,50 @@ import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/db/prisma";
 import { CircleCheckBig, CircleX } from "lucide-react";
 
-const calculateDaysLeft = (birthdayDate: Date): number => {
+const calculateDaysLeft = (birthdate: Date): number => {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
-  const isBirthdayPassedThisYear = currentDate > birthdayDate;
-  const nextYearBirthdayDate = isBirthdayPassedThisYear
-    ? new Date(currentYear, birthdayDate.getMonth(), birthdayDate.getDate())
-    : birthdayDate;
-  return Math.ceil(
-    (nextYearBirthdayDate.getTime() - currentDate.getTime()) /
-      (1000 * 60 * 60 * 24)
+  const nextBirthday = new Date(
+    currentYear,
+    birthdate.getMonth(),
+    birthdate.getDate()
   );
+
+  if (currentDate > nextBirthday) {
+    nextBirthday.setFullYear(currentYear + 1);
+  }
+  const diffTime = nextBirthday.getTime() - currentDate.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays;
 };
 
 const calculateCurrentAge = (birthdate: Date): string => {
   const currentDate = new Date();
-  const ageInYears = currentDate.getFullYear() - birthdate.getFullYear();
-  const birthdayThisYear = new Date(
+  const birthYear = birthdate.getFullYear();
+  let ageInYears = currentDate.getFullYear() - birthYear;
+
+  const nextBirthday = new Date(
     currentDate.getFullYear(),
     birthdate.getMonth(),
     birthdate.getDate()
   );
-  if (currentDate < birthdayThisYear) {
-    return `${ageInYears - 1} years and ${
-      365 - calculateDaysLeft(birthdate)
-    } days`;
-  } else if (currentDate > birthdayThisYear) {
-    return `${ageInYears} years and ${calculateDaysLeft(birthdate)} days`;
-  } else {
-    return `${ageInYears} years`;
+  if (currentDate < nextBirthday) {
+    ageInYears--;
   }
+
+  const daysSinceLastBirthday =
+    (currentDate.getTime() -
+      new Date(
+        currentDate.getFullYear(),
+        birthdate.getMonth(),
+        birthdate.getDate()
+      ).getTime()) /
+    (1000 * 60 * 60 * 24);
+  const daysSince = Math.floor(daysSinceLastBirthday);
+
+  return `${ageInYears} years and ${
+    daysSince < 0 ? 365 + daysSince : daysSince
+  } days`;
 };
 
 const UpcomingTable = async () => {
@@ -112,7 +126,7 @@ const UpcomingTable = async () => {
                     </Badge>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {data.bdate.toLocaleDateString("en-In")}
+                    {new Date(data.bdate).toLocaleDateString("en-IN")}
                   </TableCell>
                   <TableCell className="hidden sm:table-cell">
                     {data.autosend === true ? (
