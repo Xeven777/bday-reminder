@@ -14,9 +14,12 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { InfoIcon } from "lucide-react";
+import { useUser } from "@clerk/clerk-react";
 
 const BdayForm = (userinfo: { userId: string }) => {
   const router = useRouter();
+  const user = useUser();
+
   const userId = userinfo.userId;
   const [autosend, setAutosend] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -39,6 +42,7 @@ const BdayForm = (userinfo: { userId: string }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          userName: user.user?.fullName,
           userId,
           name,
           birthday,

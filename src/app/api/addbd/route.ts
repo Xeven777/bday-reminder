@@ -10,6 +10,7 @@ export async function POST(req: Request) {
     if (body.userId) {
       const bdateInfo = await prisma.bdateInfo.create({
         data: {
+          userName: body.userName,
           userId: body.userId,
           name: body.name,
           bdate: body.birthday,
