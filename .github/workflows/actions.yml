@@ -17,4 +17,4 @@ jobs:
 
       - name: Check and send bday wishes
         run: |
-          bun run dev
+          bun run check
