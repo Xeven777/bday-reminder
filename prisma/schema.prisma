@@ -13,7 +13,6 @@ model BdateInfo {
   name        String
   tag         String
   userId      String
-  userName    String?
   friendEmail String?
   autosend    Boolean?
   createdAt   DateTime @default(now())

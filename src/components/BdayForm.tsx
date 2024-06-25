@@ -43,7 +43,6 @@ const BdayForm = (userinfo: { userId: string }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userName: user.user?.fullName,
           userId,
           name,
           birthday,
