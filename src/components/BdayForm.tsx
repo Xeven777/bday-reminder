@@ -35,7 +35,8 @@ const BdayForm = (userinfo: { userId: string }) => {
 
     try {
       const birthdayString = `${month}/${day}/${year}`;
-      const birthday = new Date(birthdayString);
+      const birthday = new Date(birthdayString).toISOString();
+      console.log(birthday);
       const response = await fetch("/api/addbd", {
         method: "POST",
         headers: {

@@ -1,32 +1,40 @@
 "use server";
 
 import { generateEmailBody, sendEmail } from "@/actions/genEmail";
-
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 async function checkAndSendBirthdayEmails() {
-  // Get today's date
+  // Get today's date components
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const todayMonth = today.getUTCMonth() + 1; // getUTCMonth is zero-based
+  const todayDate = today.getUTCDate();
 
-  // Find all birthdays that match today's date
-  const birthdaysToday = await prisma.bdateInfo.findMany({
-    where: {
-      bdate: {
-        gte: today,
-        lt: new Date(today.getTime() + 24 * 60 * 60 * 1000),
-      },
-    },
+  console.log(`Checking birthdays for: ${todayMonth}-${todayDate}`);
+
+  // Find all potential birthdays
+  const allBirthdays = await prisma.bdateInfo.findMany({
     select: {
       name: true,
       friendEmail: true,
       userName: true,
+      bdate: true,
     },
   });
 
+  // Filter records for today's month and day
+  const birthdaysToday = allBirthdays.filter((birthdayPerson) => {
+    const bdate = new Date(birthdayPerson.bdate);
+    const bdateMonth = bdate.getUTCMonth() + 1;
+    const bdateDate = bdate.getUTCDate()+1;
+    return bdateMonth === todayMonth && bdateDate === todayDate;
+  });
+
+  console.log("Birthdays today:", birthdaysToday);
+
   for (const birthdayPerson of birthdaysToday) {
+    console.log(`Sending birthday email to ${birthdayPerson.name}...`);
     if (birthdayPerson.friendEmail) {
       await send(
         birthdayPerson.name,

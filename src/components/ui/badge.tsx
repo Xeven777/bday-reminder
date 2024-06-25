@@ -11,6 +11,7 @@ const badgeVariants = cva(
         Friend: "border-transparent bg-primary text-primary-foreground ",
         Family: "border-transparent bg-secondary text-secondary-foreground",
         Love: "border-transparent bg-rose-500 text-white",
+        Colleague: "border-transparent bg-green-600/30 text-lime-50",
         other: "border-primary bg-primary/20 text-purple-200",
         outline: "text-foreground",
       },

@@ -16,7 +16,26 @@ import {
 } from "@/components/ui/table";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/db/prisma";
-import { CircleCheckBig, CircleX } from "lucide-react";
+import {
+  CircleCheckBig,
+  CircleX,
+  DeleteIcon,
+  Edit,
+  Edit2Icon,
+  Settings2,
+  Trash,
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 const calculateDaysLeft = (birthdate: Date): number => {
   const currentDate = new Date();
@@ -83,7 +102,7 @@ const UpcomingTable = async () => {
     const daysLeftB = calculateDaysLeft(new Date(b.bdate));
     return daysLeftA - daysLeftB;
   });
-
+console.log(sortedData)
   return (
     <Card>
       <CardHeader className="px-7">
@@ -102,6 +121,7 @@ const UpcomingTable = async () => {
               </TableHead>
               <TableHead className="hidden md:table-cell">Birth-Date</TableHead>
               <TableHead className="hidden sm:table-cell">Autosend</TableHead>
+              <TableHead className="hidden sm:table-cell">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -118,7 +138,7 @@ const UpcomingTable = async () => {
                   </TableCell>
                   <TableCell>{currentAge}</TableCell>
 
-                  <TableCell className="text-start ">{daysLeft}</TableCell>
+                  <TableCell className="text-start">{daysLeft}</TableCell>
                   <TableCell className="hidden sm:table-cell">
                     {/* @ts-ignore  */}
                     <Badge className="text-sm" variant={data.tag}>
@@ -134,6 +154,23 @@ const UpcomingTable = async () => {
                     ) : (
                       <CircleX color="red" className="ml-5" />
                     )}
+                  </TableCell>
+                  <TableCell className="table-cell">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <Button variant={"outline"} size={"icon"}>
+                          <Settings2 size={20} />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuItem>
+                          <Link href={`/edit/${data.id}`}>Edit</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="bg-destructive ">
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
                 </TableRow>
               );
