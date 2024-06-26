@@ -22,6 +22,26 @@ export async function generateEmailBody(name: string, from: string) {
   return { subject, body };
 }
 
+export async function generateEmailBodyForUser(name: string) {
+  const subject = "Bday Test to user";
+  const body = `
+    <div style="font-family:sans;">
+    <h1>Hello !</h1>
+    <h2>Its ${name}'s birthday ...</h3>
+    <div style="border: 1px solid #ff4968; padding: 10px; background-color:rgb(56, 23, 29,0.7);border-radius:15px;color:white;">
+      <h3>Wish him! use <a href="https://wishbday.me">THISS! </a></h3>
+
+      --- from Anish
+
+      <img src="https://gifdb.com/images/high/yay-milk-and-mocha-bears-cheering-confetti-9rjvz35rjxvj7oup.gif" alt="yay" style="width: 100%;height:auto;" />
+    </div>
+    <p>Have a great day !!!!</p>
+  </div>
+      `;
+
+  return { subject, body };
+}
+
 const transporter = nodemailer.createTransport({
   pool: true,
   service: "hotmail",

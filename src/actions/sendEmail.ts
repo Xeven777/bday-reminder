@@ -1,14 +1,17 @@
 "use server";
 import { clerkClient } from "@clerk/nextjs/server";
-import { generateEmailBody, sendEmail } from "@/actions/genEmail";
+import {
+  generateEmailBody,
+  generateEmailBodyForUser,
+  sendEmail,
+} from "@/actions/genEmail";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 async function checkAndSendBirthdayEmails() {
-  // Get today's date components
   const today = new Date();
-  const todayMonth = today.getUTCMonth() + 1; // getUTCMonth is zero-based
+  const todayMonth = today.getUTCMonth() + 1;
   const todayDate = today.getUTCDate();
 
   console.log(`Checking birthdays for: ${todayMonth}-${todayDate}`);
@@ -28,28 +31,32 @@ async function checkAndSendBirthdayEmails() {
     const bdate = new Date(birthdayPerson.bdate);
     const bdateMonth = bdate.getUTCMonth() + 1;
     const bdateDate = bdate.getUTCDate() + 1;
+    console.log(
+      `Checking ${birthdayPerson.name} for: ${bdateMonth}-${bdateDate}`
+    );
     return bdateMonth === todayMonth && bdateDate === todayDate;
   });
 
-  console.log("Birthdays today:", birthdaysToday);
-
-  for (const birthdayPerson of birthdaysToday) {
+  const sendPromises = birthdaysToday.map(async (birthdayPerson) => {
     console.log(`Sending birthday email to ${birthdayPerson.name}...`);
 
     if (birthdayPerson.friendEmail) {
       const userdetails = await logUsers(birthdayPerson.userId);
       if (!userdetails) {
         console.error("User not found");
-        continue;
+        return;
       }
       const fullName = userdetails.fullName;
+      const userEmail = userdetails.senderEmail;
       await send(
         birthdayPerson.name,
         birthdayPerson.friendEmail,
-        fullName || "Good Guy"
+        fullName || "A Good Guy"
       );
+      await sendToUser(birthdayPerson.name, userEmail);
     }
-  }
+  });
+  await Promise.all(sendPromises);
 
   console.log("Birthday emails sent!");
 }
@@ -65,17 +72,23 @@ async function logUsers(userId: string) {
   }
 }
 
-logUsers("user_2fzdx2wbPGVETS43hGcBTjM3s5c");
+// logUsers("user_2fzdx2wbPGVETS43hGcBTjM3s5c");
 
-// checkAndSendBirthdayEmails()
-//   .catch((e) => {
-//     console.error(e);
-//   })
-//   .finally(async () => {
-//     await prisma.$disconnect();
-//   });
+checkAndSendBirthdayEmails()
+  .catch((e) => {
+    console.error(e);
+  })
+  .finally(() => {
+    prisma.$disconnect();
+    process.exit(0);
+  });
 
 async function send(name: string, email: string, from: string) {
   const emailbody = await generateEmailBody(name, from);
+  await sendEmail(emailbody, email);
+}
+
+async function sendToUser(name: string, email: string) {
+  const emailbody = await generateEmailBodyForUser(name);
   await sendEmail(emailbody, email);
 }

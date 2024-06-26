@@ -46,6 +46,13 @@ const calculateDaysLeft = (birthdate: Date): number => {
     birthdate.getDate()
   );
 
+  if (
+    currentDate.toDateString().slice(0, 10) ===
+    nextBirthday.toDateString().slice(0, 10)
+  ) {
+    return 0;
+  }
+
   if (currentDate > nextBirthday) {
     nextBirthday.setFullYear(currentYear + 1);
   }
@@ -102,7 +109,7 @@ const UpcomingTable = async () => {
     const daysLeftB = calculateDaysLeft(new Date(b.bdate));
     return daysLeftA - daysLeftB;
   });
-console.log(sortedData)
+  console.log(sortedData);
   return (
     <Card>
       <CardHeader className="px-7">
@@ -138,7 +145,13 @@ console.log(sortedData)
                   </TableCell>
                   <TableCell>{currentAge}</TableCell>
 
-                  <TableCell className="text-start">{daysLeft}</TableCell>
+                  <TableCell className="text-start">
+                    {daysLeft === 0
+                      ? "Todaayyyy!"
+                      : daysLeft === 1
+                      ? "Tomorrow"
+                      : `${daysLeft} days`}
+                  </TableCell>
                   <TableCell className="hidden sm:table-cell">
                     {/* @ts-ignore  */}
                     <Badge className="text-sm" variant={data.tag}>
