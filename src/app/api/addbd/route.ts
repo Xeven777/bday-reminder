@@ -1,4 +1,5 @@
 import prisma from "@/lib/db/prisma";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -64,9 +65,12 @@ export async function PATCH(req: Request) {
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json();
+    console.log(id.bdayid);
 
-    if (id) {
-      const message = await prisma.bdateInfo.delete({ where: { id } });
+    if (id.bdayid) {
+      const message = await prisma.bdateInfo.delete({
+        where: { id: id.bdayid },
+      });
 
       return new NextResponse(JSON.stringify({ message }), { status: 200 });
     }

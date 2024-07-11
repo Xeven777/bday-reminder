@@ -5,6 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -16,26 +17,17 @@ import {
 } from "@/components/ui/table";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/db/prisma";
-import {
-  CircleCheckBig,
-  CircleX,
-  DeleteIcon,
-  Edit,
-  Edit2Icon,
-  Settings2,
-  Trash,
-} from "lucide-react";
+import { CircleCheckBig, CircleX, Settings2 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { revalidatePath } from "next/cache";
+import Deletebtn from "./Deletebtn";
 
 const calculateDaysLeft = (birthdate: Date): number => {
   const currentDate = new Date();
@@ -178,8 +170,8 @@ const UpcomingTable = async () => {
                         <DropdownMenuItem asChild>
                           <Link href={`/dashboard/edit/${data.id}`}>Edit</Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="bg-destructive ">
-                          Delete
+                        <DropdownMenuItem className="bg-destructive " asChild>
+                          <Deletebtn bdayid={data.id} />
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
