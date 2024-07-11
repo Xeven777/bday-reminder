@@ -32,20 +32,49 @@ export async function POST(req: Request) {
   }
 }
 
-// export async function DELETE(req: Request) {
-//   try {
-//     const { id } = await req.json();
+export async function PATCH(req: Request) {
+  try {
+    const body = await req.json();
 
-//     if (id) {
-//       const message = await prisma.message.delete({ where: { id } });
+    if (body.id) {
+      const bdateInfo = await prisma.bdateInfo.update({
+        where: { id: body.id },
+        data: {
+          name: body.name,
+          bdate: body.birthday,
+          friendEmail: body.email,
+          tag: body.tag,
+          autosend: body.autosend,
+        },
+      });
 
-//       return new NextResponse(JSON.stringify({ message }), { status: 200 });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     return new NextResponse(
-//       JSON.stringify({ error: "Internal server error" }),
-//       { status: 500 }
-//     );
-//   }
-// }
+      return new NextResponse(JSON.stringify({ bdateInfo, ok: true }), {
+        status: 200,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return new NextResponse(
+      JSON.stringify({ error: "Internal server error" }),
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const { id } = await req.json();
+
+    if (id) {
+      const message = await prisma.bdateInfo.delete({ where: { id } });
+
+      return new NextResponse(JSON.stringify({ message }), { status: 200 });
+    }
+  } catch (error) {
+    console.log(error);
+    return new NextResponse(
+      JSON.stringify({ error: "Internal server error" }),
+      { status: 500 }
+    );
+  }
+}

@@ -46,7 +46,6 @@ const AiForm = () => {
       });
       const data = await response.json();
       setWish(data.candidates[0].content.parts[0].text);
-      console.log(data);
       toast.success("Wish generated successfully");
     } catch (e) {
       toast.error("An error occurred. Please try again.");
@@ -58,7 +57,7 @@ const AiForm = () => {
 
   return (
     <>
-      <form className="flex flex-col gap-2 border min-w-full max-w-md p-2 rounded-md">
+      <form className="flex z-20 flex-col gap-2 border min-w-full max-w-md p-2 rounded-md">
         <Input
           type="text"
           name="name"

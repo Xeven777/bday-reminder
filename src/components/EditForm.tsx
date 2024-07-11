@@ -1,4 +1,5 @@
 "use client";
+import React, { use, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useRouter } from "next/navigation";
@@ -15,10 +16,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { InfoIcon } from "lucide-react";
 
-const BdayForm = (userinfo: { userId: string }) => {
+const EditForm = (bdayinfo: { bdayid: string }) => {
   const router = useRouter();
-
-  const userId = userinfo.userId;
   const [autosend, setAutosend] = useState(true);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
@@ -27,6 +26,39 @@ const BdayForm = (userinfo: { userId: string }) => {
   const [year, setYear] = useState("");
   const [email, setEmail] = useState("");
   const [tag, setTag] = useState("");
+
+  useEffect(() => {
+    async function fetchBday() {
+      try {
+        const response = await fetch(`/api/getbd/${bdayinfo.bdayid}`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+
+          setName(data.name);
+          setEmail(data.friendEmail); // Assuming friendEmail corresponds to email
+          setTag(data.tag);
+          setAutosend(data.autosend);
+
+          // Processing date
+          const date = new Date(data.bdate);
+          setDay(date.getDate().toString());
+          setMonth((date.getMonth() + 1).toString());
+          setYear(date.getFullYear().toString());
+
+          toast.success("Info fetched successfully");
+        } else {
+          toast.error("Failed to fetch data");
+        }
+      } catch (error) {
+        toast.error("An error occurred while fetching data.");
+        console.error(error);
+      }
+    }
+
+    fetchBday();
+  }, [bdayinfo.bdayid]);
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
@@ -35,12 +67,12 @@ const BdayForm = (userinfo: { userId: string }) => {
       const birthdayString = `${month}/${day}/${year}`;
       const birthday = new Date(birthdayString).toISOString();
       const response = await fetch("/api/addbd", {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId,
+          id: bdayinfo.bdayid,
           name,
           birthday,
           email,
@@ -62,7 +94,7 @@ const BdayForm = (userinfo: { userId: string }) => {
   return (
     <div className="z-20 w-full max-w-md rounded-lg bg-card p-6 shadow-purple-800/30 transition-all shadow-inner glow-card">
       <h1 className="bric mb-4 text-3xl font-bold glow-d">
-        Add Birthday Reminder
+        Edit Birthday Reminder
       </h1>
       <form className="space-y-5" onSubmit={(e) => handleSubmit(e)}>
         <div>
@@ -205,4 +237,4 @@ const BdayForm = (userinfo: { userId: string }) => {
   );
 };
 
-export default BdayForm;
+export default EditForm;

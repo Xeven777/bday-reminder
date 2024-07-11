@@ -109,7 +109,6 @@ const UpcomingTable = async () => {
     const daysLeftB = calculateDaysLeft(new Date(b.bdate));
     return daysLeftA - daysLeftB;
   });
-  console.log(sortedData);
   return (
     <Card>
       <CardHeader className="px-7">
@@ -170,14 +169,14 @@ const UpcomingTable = async () => {
                   </TableCell>
                   <TableCell className="table-cell">
                     <DropdownMenu>
-                      <DropdownMenuTrigger>
+                      <DropdownMenuTrigger asChild>
                         <Button variant={"outline"} size={"icon"}>
                           <Settings2 size={20} />
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
-                        <DropdownMenuItem>
-                          <Link href={`/edit/${data.id}`}>Edit</Link>
+                        <DropdownMenuItem asChild>
+                          <Link href={`/dashboard/edit/${data.id}`}>Edit</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem className="bg-destructive ">
                           Delete
