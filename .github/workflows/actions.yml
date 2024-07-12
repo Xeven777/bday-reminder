@@ -2,7 +2,8 @@ name: Daily Bday Check
 
 on:
   schedule:
-    - cron: "0 5 * * *"
+    - cron: "35 18 * * *"
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest

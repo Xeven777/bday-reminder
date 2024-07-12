@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -26,9 +25,9 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { revalidatePath } from "next/cache";
 import Deletebtn from "./Deletebtn";
 
+// Function to calculate days left until next birthday in IST
 const calculateDaysLeft = (birthdate: Date): number => {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -48,11 +47,17 @@ const calculateDaysLeft = (birthdate: Date): number => {
   if (currentDate > nextBirthday) {
     nextBirthday.setFullYear(currentYear + 1);
   }
+
+  // Convert to Indian Standard Time (UTC+5:30)
+  nextBirthday.setHours(nextBirthday.getHours() + 5); // UTC+5
+  nextBirthday.setMinutes(nextBirthday.getMinutes() + 30); // +30 minutes for UTC+5:30
+
   const diffTime = nextBirthday.getTime() - currentDate.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   return diffDays;
 };
 
+// Function to calculate current age in years and days in IST
 const calculateCurrentAge = (birthdate: Date): string => {
   const currentDate = new Date();
   const birthYear = birthdate.getFullYear();
@@ -67,6 +72,7 @@ const calculateCurrentAge = (birthdate: Date): string => {
     ageInYears--;
   }
 
+  // Convert to Indian Standard Time (UTC+5:30)
   const daysSinceLastBirthday =
     (currentDate.getTime() -
       new Date(
@@ -101,6 +107,7 @@ const UpcomingTable = async () => {
     const daysLeftB = calculateDaysLeft(new Date(b.bdate));
     return daysLeftA - daysLeftB;
   });
+
   return (
     <Card>
       <CardHeader className="px-7">
@@ -135,16 +142,15 @@ const UpcomingTable = async () => {
                     </div>
                   </TableCell>
                   <TableCell>{currentAge}</TableCell>
-
                   <TableCell className="text-start">
                     {daysLeft === 0
-                      ? "Todaayyyy!"
+                      ? "Todayyyy🥳"
                       : daysLeft === 1
-                      ? "Tomorrow"
+                      ? "Tomorroww🤩"
                       : `${daysLeft} days`}
                   </TableCell>
                   <TableCell className="hidden sm:table-cell">
-                    {/* @ts-ignore  */}
+                    {/* @ts-ignore */}
                     <Badge className="text-sm" variant={data.tag}>
                       {data.tag}
                     </Badge>
@@ -170,7 +176,7 @@ const UpcomingTable = async () => {
                         <DropdownMenuItem asChild>
                           <Link href={`/dashboard/edit/${data.id}`}>Edit</Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="bg-destructive " asChild>
+                        <DropdownMenuItem className="bg-destructive" asChild>
                           <Deletebtn bdayid={data.id} />
                         </DropdownMenuItem>
                       </DropdownMenuContent>
