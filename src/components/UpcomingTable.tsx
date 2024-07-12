@@ -27,7 +27,6 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import Deletebtn from "./Deletebtn";
 
-// Function to calculate days left until next birthday in IST
 const calculateDaysLeft = (birthdate: Date): number => {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -48,16 +47,14 @@ const calculateDaysLeft = (birthdate: Date): number => {
     nextBirthday.setFullYear(currentYear + 1);
   }
 
-  // Convert to Indian Standard Time (UTC+5:30)
-  nextBirthday.setHours(nextBirthday.getHours() + 5); // UTC+5
-  nextBirthday.setMinutes(nextBirthday.getMinutes() + 30); // +30 minutes for UTC+5:30
+  nextBirthday.setHours(nextBirthday.getHours());
+  nextBirthday.setMinutes(nextBirthday.getMinutes());
 
   const diffTime = nextBirthday.getTime() - currentDate.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   return diffDays;
 };
 
-// Function to calculate current age in years and days in IST
 const calculateCurrentAge = (birthdate: Date): string => {
   const currentDate = new Date();
   const birthYear = birthdate.getFullYear();
@@ -72,7 +69,6 @@ const calculateCurrentAge = (birthdate: Date): string => {
     ageInYears--;
   }
 
-  // Convert to Indian Standard Time (UTC+5:30)
   const daysSinceLastBirthday =
     (currentDate.getTime() -
       new Date(
@@ -101,7 +97,7 @@ const UpcomingTable = async () => {
       createdAt: "desc",
     },
   });
-
+  console.log(allData);
   const sortedData = allData.sort((a, b) => {
     const daysLeftA = calculateDaysLeft(new Date(a.bdate));
     const daysLeftB = calculateDaysLeft(new Date(b.bdate));
@@ -156,7 +152,9 @@ const UpcomingTable = async () => {
                     </Badge>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {new Date(data.bdate).toLocaleDateString("en-IN")}
+                    {new Date(data.bdate).toLocaleDateString("en-IN", {
+                      timeZone: "Asia/Kolkata",
+                    })}
                   </TableCell>
                   <TableCell className="hidden sm:table-cell">
                     {data.autosend === true ? (
