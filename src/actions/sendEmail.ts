@@ -16,7 +16,6 @@ async function checkAndSendBirthdayEmails() {
 
   console.log(`Checking birthdays for: ${todayMonth}-${todayDate}`);
 
-  // Find all potential birthdays
   const allBirthdays = await prisma.bdateInfo.findMany({
     select: {
       userId: true,
@@ -72,8 +71,6 @@ async function logUsers(userId: string) {
   }
 }
 
-// logUsers("user_2fzdx2wbPGVETS43hGcBTjM3s5c");
-
 checkAndSendBirthdayEmails()
   .catch((e) => {
     console.error(e);
@@ -85,10 +82,10 @@ checkAndSendBirthdayEmails()
 
 async function send(name: string, email: string, from: string) {
   const emailbody = await generateEmailBody(name, from);
-  await sendEmail(emailbody, email);
+  await sendEmail({ ...emailbody, body: await emailbody.body }, email);
 }
 
 async function sendToUser(name: string, email: string) {
   const emailbody = await generateEmailBodyForUser(name);
-  await sendEmail(emailbody, email);
+  await sendEmail({ ...emailbody, body: await emailbody.body }, email);
 }

@@ -1,43 +1,36 @@
 "use server";
 
 import nodemailer from "nodemailer";
+import BirthdayEmail from "./index";
+import BirthdayWishEmail from "./emailtoUser";
+import { renderAsync } from "@react-email/components";
 
 export async function generateEmailBody(name: string, from: string) {
-  const subject = "Bday Test";
-  const url = "https://openme.vercel.app/b/" + btoa(name);
-  const body = `
-    <div style="font-family:sans;">
-    <h1>Hello ${name} !</h1>
-    <h2>You got a response</h3>
-    <div style="border: 1px solid #ff4968; padding: 10px; background-color:rgb(56, 23, 29,0.7);border-radius:15px;color:white;">
-      <h3>Your Bday Nigga?? : from - ${from}</h3>
-      <a href="${url}">Click</a>
+  const subject = "Happy Birthdayy " + name + "!";
 
-      <img src="https://gifdb.com/images/high/yay-milk-and-mocha-bears-cheering-confetti-9rjvz35rjxvj7oup.gif" alt="yay" style="width: 100%;height:auto;" />
-    </div>
-    <p>Have a great day !!!!</p>
-  </div>
-      `;
+  const body = renderAsync(
+    BirthdayEmail({
+      recipientName: name,
+      senderName: from,
+    }),
+    {
+      pretty: true,
+    }
+  );
 
   return { subject, body };
 }
 
 export async function generateEmailBodyForUser(name: string) {
-  const subject = "Bday Test to user";
-  const body = `
-    <div style="font-family:sans;">
-    <h1>Hello !</h1>
-    <h2>Its ${name}'s birthday ...</h3>
-    <div style="border: 1px solid #ff4968; padding: 10px; background-color:rgb(56, 23, 29,0.7);border-radius:15px;color:white;">
-      <h3>Wish him! use <a href="https://wishbday.me">THISS! </a></h3>
-
-      --- from Anish
-
-      <img src="https://gifdb.com/images/high/yay-milk-and-mocha-bears-cheering-confetti-9rjvz35rjxvj7oup.gif" alt="yay" style="width: 100%;height:auto;" />
-    </div>
-    <p>Have a great day !!!!</p>
-  </div>
-      `;
+  const subject = "Birthday email sent to " + name;
+  const body = renderAsync(
+    BirthdayWishEmail({
+      name: name,
+    }),
+    {
+      pretty: true,
+    }
+  );
 
   return { subject, body };
 }

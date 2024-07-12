@@ -80,7 +80,7 @@ export default function RootLayout({
                 href="/"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <Home className="h-5 w-5" />
+                <Home size={18} />
                 <span className="sr-only">Dashboard</span>
               </Link>
             </TooltipTrigger>
@@ -92,7 +92,7 @@ export default function RootLayout({
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <Cake className="h-5 w-5" />
+                <Cake size={18} />
                 <span className="sr-only">Add Birthday</span>
               </Link>
             </TooltipTrigger>
@@ -104,7 +104,7 @@ export default function RootLayout({
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <CakeSlice className="h-5 w-5" />
+                <CakeSlice size={18} />
                 <span className="sr-only">AI wish</span>
               </Link>
             </TooltipTrigger>
@@ -118,7 +118,7 @@ export default function RootLayout({
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <Settings className="h-5 w-5" />
+                <Settings size={18} />
                 <span className="sr-only">Settings</span>
               </Link>
             </TooltipTrigger>
@@ -131,7 +131,7 @@ export default function RootLayout({
           <Sheet>
             <SheetTrigger asChild>
               <Button size="icon" variant="outline" className="sm:hidden">
-                <PanelLeft className="h-5 w-5" />
+                <PanelLeft size={18} />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
@@ -148,35 +148,35 @@ export default function RootLayout({
                   href="/"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <Home className="h-5 w-5" />
+                  <Home size={18} />
                   Dashboard
                 </Link>
                 <Link
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-foreground"
                 >
-                  <Cake className="h-5 w-5" />
+                  <Cake size={18} />
                   Orders
                 </Link>
                 <Link
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <Package className="h-5 w-5" />
+                  <Package size={18} />
                   Products
                 </Link>
                 <Link
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <Users2 className="h-5 w-5" />
+                  <Users2 size={18} />
                   Customers
                 </Link>
                 <Link
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <LineChart className="h-5 w-5" />
+                  <LineChart size={18} />
                   Settings
                 </Link>
               </nav>
