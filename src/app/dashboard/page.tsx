@@ -33,41 +33,43 @@ const dashboard = () => {
           >
             <div className="absolute h-full w-full bg-[radial-gradient(#392d4c_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
             <CardHeader className="pb-3">
-              <CardTitle className="z-10">Upcoming Birthday</CardTitle>
-              <CardDescription className="max-w-lg z-20 text-balance leading-relaxed">
-                Introducing Our Dynamic Orders Dashboard for Seamless Management
-                and Insightful Analysis.
+              <CardTitle className="z-10">Add Birthday🎂</CardTitle>
+              <CardDescription className="max-w-lg z-20 py-1 text-balance tracking-wider leading-relaxed">
+                Add birthdays, auto send emails, get notified and
+                <br /> never miss a birthday again!
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <Button className="z-30">Create New Order</Button>
-            </CardFooter>
-          </Card>
-
-          <Card>
-            <CardHeader className="pb-2">
-              <CardDescription>Add Birthday</CardDescription>
-            </CardHeader>
-            <CardContent className="font-semibold">
-              Don&apos;t ever forget to wish again!
-            </CardContent>
-            <CardFooter>
               <Button asChild size="sm">
-                <Link href={"/dashboard/add"}>Add Birthday!</Link>
+                <Link href={"/dashboard/add"} className="z-30">
+                  Add Birthday!
+                </Link>
               </Button>
             </CardFooter>
           </Card>
-
-          <Card>
+          <Card className="shadow-inner shadow-primary/40 hover:shadow-purple-700 hover:shadow-inner">
             <CardHeader className="pb-2">
               <CardDescription>boring wishes?!</CardDescription>
             </CardHeader>
             <CardContent className="font-semibold">
-              Forget it, Create unique wishes now!
+              Forget it, Create unique wishes now!🔥
             </CardContent>
             <CardFooter>
               <Button asChild size="sm">
                 <Link href={"/dashboard/aiwish"}>AI Wisher!</Link>
+              </Button>
+            </CardFooter>
+          </Card>
+          <Card className="bg-gradient-to-br from-purple-800 to-indigo-800">
+            <CardHeader className="pb-2">
+              <CardDescription>Create Birthday Website</CardDescription>
+            </CardHeader>
+            <CardContent className="font-semibold">
+              Wish them in a way they deserve!🎉
+            </CardContent>
+            <CardFooter>
+              <Button asChild size="sm">
+                <Link href={"https://wishbday.me/"}>Create website!</Link>
               </Button>
             </CardFooter>
           </Card>

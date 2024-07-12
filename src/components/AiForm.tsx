@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import {
@@ -12,8 +12,15 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Skeleton } from "./ui/skeleton";
+import { Copy, Share2 } from "lucide-react";
 
 const AiForm = () => {
+  const [shareable, setShareable] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setShareable(navigator.share !== undefined);
+    }
+  }, []);
   const [name, setName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [tone, setTone] = useState<string>("");
@@ -105,15 +112,47 @@ const AiForm = () => {
           Generate
         </Button>
       </form>
-      <div className="flex flex-col p-2 border rounded-md mt-6">
+      <div className="flex w-full flex-col p-2 relative border rounded-md mt-6">
+        <Button
+          onClick={() => {
+            if (!wish) return;
+            navigator.clipboard.writeText(wish);
+            toast.success("Copied to clipboard");
+          }}
+          className="absolute top-2 right-2"
+          size={"icon"}
+          variant={"outline"}
+        >
+          <Copy size={20} />
+        </Button>
+
+        {shareable ? (
+          <Button
+            className="absolute top-2 right-14"
+            size={"icon"}
+            variant={"secondary"}
+            onClick={() => {
+              if (wish === "")
+                return toast.warning("Wish is empty. Generate the Wish first!");
+              if (typeof window !== "undefined") {
+                navigator.share({
+                  title: "Happy Birthday!",
+                  text: wish,
+                });
+              }
+            }}
+          >
+            <Share2 size={20} />
+          </Button>
+        ) : null}
         <h2 className="p-2 font-semibold">Generated wish :</h2>
-        <div className="py-2 min-h-32 mt-4 rounded-lg border-2 border-dashed border-purple-700/40 text-sm flex items-center justify-center">
+        <div className="py-2 w-full min-h-32 mt-4 rounded-lg border-2 border-dashed border-purple-700/40 text-sm flex items-center justify-center">
           {loading ? (
             <div className="flex justify-center items-center h-20">
               <Skeleton className="w-full h-full rounded-md" />
             </div>
           ) : (
-            <p>{wish}</p>
+            <p className="p-4 text-lg">{wish}</p>
           )}
         </div>
       </div>
