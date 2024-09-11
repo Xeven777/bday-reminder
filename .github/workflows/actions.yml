@@ -2,7 +2,7 @@ name: Daily Bday Check
 
 on:
   schedule:
-    - cron: "35 18 * * *"
+    - cron: "31 18 * * *"
 
 jobs:
   update-readme:
