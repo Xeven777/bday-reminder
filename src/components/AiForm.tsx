@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { readStreamableValue } from "ai/rsc";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -11,8 +12,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Skeleton } from "./ui/skeleton";
-import { Copy, Share2 } from "lucide-react";
+import { Copy, Loader, Share2 } from "lucide-react";
+import { generate } from "@/actions/ai-wish";
+
+export const maxDuration = 30;
 
 const AiForm = () => {
   const [shareable, setShareable] = useState(false);
@@ -27,32 +30,15 @@ const AiForm = () => {
   const [relationship, setRelationship] = useState<string>("");
   const [wish, setWish] = useState<string>("");
 
-  const apikey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apikey}`;
+  const prompt = `Create a birthday wish for ${name}, who is my ${relationship}, in  ${tone} tone.`;
 
   async function handleSubmit() {
     setLoading(true);
-    const prompt = `Create a birthday wish for ${name}, who is my ${relationship}, in  ${tone} tone.use emojis too. should be atleast 3 or more lines. give only the wish , no other text.`;
     try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: prompt,
-                },
-              ],
-            },
-          ],
-        }),
-      });
-      const data = await response.json();
-      setWish(data.candidates[0].content.parts[0].text);
+      const { output } = await generate(prompt);
+      for await (const delta of readStreamableValue(output)) {
+        setWish((currentWish) => `${currentWish}${delta}`);
+      }
       toast.success("Wish generated successfully");
     } catch (e) {
       toast.error("An error occurred. Please try again.");
@@ -63,8 +49,8 @@ const AiForm = () => {
   }
 
   return (
-    <>
-      <form className="flex z-20 flex-col gap-2 border min-w-full max-w-md p-2 rounded-md">
+    <div className="grid grid-cols-1 mt-2 w-full md:grid-cols-2">
+      <form className="flex pt-16 flex-col gap-2 border min-w-full max-w-md p-2 rounded-md">
         <Input
           type="text"
           name="name"
@@ -112,19 +98,22 @@ const AiForm = () => {
           Generate
         </Button>
       </form>
-      <div className="flex w-full flex-col p-2 relative border rounded-md mt-6">
-        <Button
-          onClick={() => {
-            if (!wish) return;
-            navigator.clipboard.writeText(wish);
-            toast.success("Copied to clipboard");
-          }}
-          className="absolute top-2 right-2"
-          size={"icon"}
-          variant={"outline"}
-        >
-          <Copy size={20} />
-        </Button>
+
+      <div className="flex w-full flex-col p-2 relative border rounded-md">
+        {wish && (
+          <Button
+            onClick={() => {
+              if (!wish) return;
+              navigator.clipboard.writeText(wish);
+              toast.success("Copied to clipboard");
+            }}
+            className="absolute top-2 right-2"
+            size={"icon"}
+            variant={"outline"}
+          >
+            <Copy size={20} />
+          </Button>
+        )}
 
         {shareable ? (
           <Button
@@ -146,17 +135,18 @@ const AiForm = () => {
           </Button>
         ) : null}
         <h2 className="p-2 font-semibold">Generated wish :</h2>
-        <div className="py-2 w-full min-h-32 mt-4 rounded-lg border-2 border-dashed border-purple-700/40 text-sm flex items-center justify-center">
-          {loading ? (
-            <div className="flex justify-center items-center h-20">
-              <Skeleton className="w-full h-full rounded-md" />
-            </div>
-          ) : (
-            <p className="p-4 text-lg">{wish}</p>
+        <div className="py-2 w-full h-full mt-4 rounded-lg border-2 border-dashed border-purple-700/40 text-sm flex items-center justify-center">
+          <p className="p-4 text-lg">
+            {wish} {loading && <Loader className="animate-spin" />}
+          </p>
+          {!wish && !loading && (
+            <p className="text-muted-foreground text-sm">
+              Your wish will appear here
+            </p>
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
