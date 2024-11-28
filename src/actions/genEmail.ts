@@ -1,81 +1,56 @@
 "use server";
 
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import BirthdayEmail from "./index";
 import BirthdayWishEmail from "./emailtoUser";
-import { renderAsync } from "@react-email/components";
+import { render } from "@react-email/components";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function generateEmailBody(name: string, from: string) {
-  const subject = "Happy Birthdayy " + name + "!";
-
-  const body = renderAsync(
-    BirthdayEmail({
-      recipientName: name,
-      senderName: from,
-    }),
-    {
-      pretty: true,
-    }
-  );
-
-  return { subject, body };
+  return {
+    subject: `Happy Birthday ${name}!`,
+    body: render(
+      BirthdayEmail({
+        recipientName: name,
+        senderName: from,
+      })
+    ),
+  };
 }
 
 export async function generateEmailBodyForUser(name: string) {
-  const subject = "Birthday email sent to " + name;
-  const body = renderAsync(
-    BirthdayWishEmail({
-      name: name,
-    }),
-    {
-      pretty: true,
-    }
-  );
-
-  return { subject, body };
+  return {
+    subject: `Birthday email sent to ${name}`,
+    body: render(
+      BirthdayWishEmail({
+        name: name,
+      })
+    ),
+  };
 }
 
-const transporter = nodemailer.createTransport({
-  pool: true,
-  service: "hotmail",
-  port: 2525,
-  auth: {
-    user: "xevenbiswas@outlook.com",
-    pass: process.env.EMAIL_PW,
-  },
-  maxConnections: 1,
-});
+export async function sendEmail(emailContent: EmailContent, sendTo: string) {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "Birthday Reminder <bdayreminder@anish7.me>",
+      to: [sendTo],
+      subject: emailContent.subject,
+      html: emailContent.body,
+      tags: [{ name: "category", value: "birthday" }],
+    });
 
-export const sendEmail = async (emailContent: EmailContent, sendTo: string) => {
-  const mailOptions = {
-    from: "xevenbiswas@outlook.com",
-    to: sendTo,
-    html: emailContent.body,
-    subject: emailContent.subject,
-  };
-  await new Promise((resolve, reject) => {
-    transporter.verify(function (error, success) {
-      if (error) {
-        console.log(error);
-        reject(error);
-      } else {
-        console.log("Server is ready to take our messages");
-        resolve(success);
-      }
-    });
-  });
-  await new Promise((resolve, reject) => {
-    transporter.sendMail(mailOptions, (err, info) => {
-      if (err) {
-        console.error(err);
-        reject(err);
-      } else {
-        console.log(info);
-        resolve(info);
-      }
-    });
-  });
-};
+    if (error) {
+      console.error("Email sending failed:", error);
+      return { error: error.message, status: 500 };
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Unexpected error: ", error);
+    return null;
+  }
+}
 
 type EmailContent = {
   subject: string;
