@@ -17,9 +17,6 @@ import confetti from "canvas-confetti";
 import Link from "next/link";
 
 export default function LandingPage() {
-  // if (isSignedIn) {
-  //   router.replace("/dashboard");
-  // }
 
   return (
     <div>
