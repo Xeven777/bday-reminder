@@ -179,7 +179,9 @@ const ThisMonthTable = async () => {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
                         <DropdownMenuItem asChild>
-                          <Link href={`/dashboard/edit/${data.id}`}>Edit</Link>
+                          <Link href={`/dashboard/edit?id=${data.id}`}>
+                            Edit
+                          </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem className="bg-destructive" asChild>
                           <Deletebtn bdayid={data.id} />

@@ -4,13 +4,13 @@ import Bloby from "@/components/ui/bloby";
 import EditForm from "@/components/EditForm";
 
 const page = async ({
-  params,
+  searchParams,
 }: {
-  params: {
+  searchParams: {
     id: string;
   };
 }) => {
-  const id = params.id;
+  const id = searchParams.id;
   return (
     <div className="flex flex-wrap gap-2 justify-around mt-8 relative flex-1 w-full max-w-6xl mx-auto items-center">
       <EditForm bdayid={id} />
