@@ -14,6 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { features, testimonials } from "@/lib/data";
 import Image from "next/image";
 import confetti from "canvas-confetti";
+import Link from "next/link";
 
 export default function LandingPage() {
   // if (isSignedIn) {
@@ -60,10 +61,14 @@ export default function LandingPage() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="max-w-md space-x-4"
             >
-              <Button size="lg">Start now!</Button>
-              <Button size="lg" variant="outline">
-                Dashboard
-              </Button>
+              <Link href="/dashboard">
+                <Button size="lg">Start now!</Button>
+              </Link>
+              <Link href="/dashboard">
+                <Button size="lg" variant="outline">
+                  Dashboard
+                </Button>
+              </Link>
             </motion.div>
           </div>
           <Image
@@ -78,17 +83,17 @@ export default function LandingPage() {
 
       {/* Features Grid */}
       <div className="container px-4 py-16 mx-auto">
-        <h2 className="mb-12 text-3xl font-bold text-center">
-          Powerful Features for Every Celebration
+        <h2 className="mb-12 text-3xl md:text-5xl font-bold text-center">
+          Features
         </h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-2 mx-auto max-w-5xl">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
-              className="p-6 bg-white rounded-xl dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow"
+              className="p-6 bg-muted/30 rounded-xl hover:shadow-primary/20 shadow-md transition-all cursor-pointer"
             >
               <feature.icon className="w-12 h-12 mb-4 text-primary" />
               <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
@@ -99,7 +104,7 @@ export default function LandingPage() {
       </div>
 
       {/* Testimonials Section */}
-      <div className="container px-4 py-16 mx-auto">
+      <div className="container px-4 py-16 mx-auto max-w-6xl">
         <h2 className="mb-12 text-3xl font-bold text-center">
           What Our Users Say
         </h2>
@@ -140,9 +145,9 @@ export default function LandingPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.5 }}
-        className="container px-4 py-16 mx-auto text-center"
+        className="container px-4 py-16 mx-auto text-center max-w-6xl"
       >
-        <div className="p-8 bg-primary rounded-2xl">
+        <div className="p-8 bg-gradient-to-b from-primary to-primary/50 rounded-2xl">
           <h2 className="mb-4 text-3xl font-bold text-primary-foreground">
             Ready to Start?
           </h2>

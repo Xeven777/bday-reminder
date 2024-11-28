@@ -1,11 +1,12 @@
 import {
-    Gift,
-    Mail,
-    Brain, Cloud,
-    Sparkles,
-    Calendar,
-    Bell,
-    Cake
+  Gift,
+  Mail,
+  Brain,
+  Cloud,
+  Sparkles,
+  Calendar,
+  Bell,
+  Cake,
 } from "lucide-react";
 
 export const features = [
@@ -32,30 +33,6 @@ export const features = [
     title: "Custom Celebration Websites",
     description:
       "Generate beautiful, interactive birthday websites for your loved ones. Share memories, photos, and wishes in a unique online space.",
-  },
-  {
-    icon: Calendar,
-    title: "Calendar Integration",
-    description:
-      "Seamlessly sync birthday reminders with your favorite calendar apps. Stay organized across all your devices.",
-  },
-  {
-    icon: Bell,
-    title: "Multi-platform Notifications",
-    description:
-      "Get birthday alerts on your preferred platforms - email, SMS, or push notifications. Never miss a celebration, no matter where you are.",
-  },
-  {
-    icon: Cake,
-    title: "Gift Suggestions",
-    description:
-      "Receive personalized gift ideas based on the recipient's interests and your budget. Make every gift meaningful and appreciated.",
-  },
-  {
-    icon: Gift,
-    title: "Virtual Gift Cards",
-    description:
-      "Send instant virtual gift cards from popular retailers. Perfect for last-minute gifts or long-distance celebrations.",
   },
 ];
 
