@@ -25,7 +25,6 @@ async function checkAndSendBirthdayEmails() {
     },
   });
 
-  // Filter records for today's month and day
   const birthdaysToday = allBirthdays.filter((birthdayPerson) => {
     const bdate = new Date(birthdayPerson.bdate);
     const bdateMonth = bdate.getUTCMonth() + 1;
@@ -36,6 +35,7 @@ async function checkAndSendBirthdayEmails() {
     return bdateMonth === todayMonth && bdateDate === todayDate;
   });
 
+  console.log("Birthdays today:", birthdaysToday);
   const sendPromises = birthdaysToday.map(async (birthdayPerson) => {
     console.log(`Sending birthday email to ${birthdayPerson.name}...`);
 
@@ -45,13 +45,9 @@ async function checkAndSendBirthdayEmails() {
         console.error("User not found");
         return;
       }
-      const fullName = userdetails.fullName;
+      const fullName = userdetails.fullName || "A Good Guy";
       const userEmail = userdetails.senderEmail;
-      await send(
-        birthdayPerson.name,
-        birthdayPerson.friendEmail,
-        fullName || "A Good Guy"
-      );
+      await send(birthdayPerson.name, birthdayPerson.friendEmail, fullName);
       await sendToUser(birthdayPerson.name, userEmail);
     }
   });
@@ -62,12 +58,13 @@ async function checkAndSendBirthdayEmails() {
 
 async function logUsers(userId: string) {
   try {
-    const users = await clerkClient.users.getUser(userId);
-    const fullName = users.fullName ? users.fullName : users.firstName;
+    const users = await clerkClient().users.getUser(userId);
+    const fullName = users.fullName || users.firstName;
     const senderEmail = users.emailAddresses[0].emailAddress;
     return { fullName, senderEmail };
   } catch (error) {
     console.error("Error fetching users:", error);
+    return null;
   }
 }
 

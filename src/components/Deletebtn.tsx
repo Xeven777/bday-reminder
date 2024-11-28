@@ -27,11 +27,11 @@ const Deletebtn = (bdayid: { bdayid: string }) => {
   };
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="bg-destructive" asChild>
-        <Button variant={"destructive"}>
-          Delete{" "}
+      <AlertDialogTrigger asChild>
+        <Button className="w-full" variant={"outline"}>
+          Delete
           <span>
-            <Trash size={18} className="ml-2" />
+            <Trash size={18} className="ml-2" color="red" />
           </span>
         </Button>
       </AlertDialogTrigger>
