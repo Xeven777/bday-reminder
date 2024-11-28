@@ -7,6 +7,7 @@
     "dev": "next dev --turbo",
     "email": "email dev",
     "check": "bun run ./src/actions/sendEmail.ts",
+    "studio": "bun x prisma studio",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -14,6 +15,7 @@
   "dependencies": {
     "@ai-sdk/google": "^1.0.4",
     "@clerk/nextjs": "^5.7.5",
+    "@clerk/themes": "^2.1.48",
     "@prisma/client": "^5.22.0",
     "@radix-ui/react-alert-dialog": "^1.1.2",
     "@radix-ui/react-dialog": "^1.1.2",

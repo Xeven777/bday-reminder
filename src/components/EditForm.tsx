@@ -1,5 +1,6 @@
 "use client";
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useRouter } from "next/navigation";
@@ -26,6 +27,7 @@ const EditForm = (bdayinfo: { bdayid: string }) => {
   const [year, setYear] = useState("");
   const [email, setEmail] = useState("");
   const [tag, setTag] = useState("");
+  const { user } = useUser();
 
   useEffect(() => {
     async function fetchBday() {
@@ -33,14 +35,17 @@ const EditForm = (bdayinfo: { bdayid: string }) => {
         const response = await fetch(`/api/getbd/${bdayinfo.bdayid}`);
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
+          if (data.userId !== user?.id) {
+            toast.error("You are not authorized to view this page");
+            router.push("/dashboard");
+            return;
+          }
 
           setName(data.name);
-          setEmail(data.friendEmail); // Assuming friendEmail corresponds to email
+          setEmail(data.friendEmail);
           setTag(data.tag);
           setAutosend(data.autosend);
 
-          // Processing date
           const date = new Date(data.bdate);
           setDay(date.getDate().toString());
           setMonth((date.getMonth() + 1).toString());

@@ -1,5 +1,3 @@
-import BdayForm from "@/components/BdayForm";
-import { currentUser, User } from "@clerk/nextjs/server";
 import Image from "next/image";
 import calendar from "@/assets/Calendar-cuate.svg";
 import Bloby from "@/components/ui/bloby";

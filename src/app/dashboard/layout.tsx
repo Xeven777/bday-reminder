@@ -38,6 +38,7 @@ import {
 import { useUser, UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import path from "path";
+import Link from "next/link";
 
 const navItems = [
   {
@@ -111,12 +112,14 @@ export default function RootLayout({
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <div className="flex items-center gap-2 p-2">
-                  <UserButton />{" "}
-                  <span className="font-bold text-lg cursor-pointer">
-                    {user?.fullName}
-                  </span>
-                </div>
+                <Link href="/dashboard/profile/security">
+                  <div className="flex items-center gap-2 p-2">
+                    <UserButton />{" "}
+                    <span className="font-bold text-lg cursor-pointer">
+                      {user?.fullName}
+                    </span>
+                  </div>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

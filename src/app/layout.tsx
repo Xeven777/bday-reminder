@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
+import { dark } from "@clerk/themes";
 
 const manrope = Manrope({ subsets: ["latin"] });
 
@@ -19,7 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+        variables: {
+          colorPrimary: "#8130F6",
+        },
+      }}
+    >
       <html lang="en" className="dark">
         <TooltipProvider>
           <body className={manrope.className}>
