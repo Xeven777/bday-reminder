@@ -3,156 +3,77 @@
 import { motion } from "framer-motion";
 import {
   Gift,
-  Mail,
-  Brain,
   Star,
-  Cloud,
-  Sparkles,
-  Calendar,
-  Bell,
-  Cake,
   Facebook,
   Twitter,
   Instagram,
   Linkedin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { auth } from "@clerk/nextjs/server";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
-import { useUser } from "@clerk/nextjs";
+import { features, testimonials } from "@/lib/data";
+import Image from "next/image";
+import confetti from "canvas-confetti";
 
 export default function LandingPage() {
-  const [showConfetti, setShowConfetti] = useState(false);
-  const { isSignedIn } = useUser();
-  const router = useRouter();
-  if (isSignedIn) {
-    router.replace("/dashboard");
-  }
-  const features = [
-    {
-      icon: Mail,
-      title: "Smart Email Reminders",
-      description:
-        "Receive timely, personalized email reminders for upcoming birthdays. Our intelligent system ensures you never miss a special day.",
-    },
-    {
-      icon: Brain,
-      title: "AI-Powered Wish Generator",
-      description:
-        "Leverage cutting-edge AI to create heartfelt, personalized birthday wishes. Say goodbye to generic messages and writer's block.",
-    },
-    {
-      icon: Cloud,
-      title: "Secure Cloud Storage",
-      description:
-        "Store all your birthday data securely in the cloud. Access your information from any device, anytime, anywhere.",
-    },
-    {
-      icon: Sparkles,
-      title: "Custom Celebration Websites",
-      description:
-        "Generate beautiful, interactive birthday websites for your loved ones. Share memories, photos, and wishes in a unique online space.",
-    },
-    {
-      icon: Calendar,
-      title: "Calendar Integration",
-      description:
-        "Seamlessly sync birthday reminders with your favorite calendar apps. Stay organized across all your devices.",
-    },
-    {
-      icon: Bell,
-      title: "Multi-platform Notifications",
-      description:
-        "Get birthday alerts on your preferred platforms - email, SMS, or push notifications. Never miss a celebration, no matter where you are.",
-    },
-    {
-      icon: Cake,
-      title: "Gift Suggestions",
-      description:
-        "Receive personalized gift ideas based on the recipient's interests and your budget. Make every gift meaningful and appreciated.",
-    },
-    {
-      icon: Gift,
-      title: "Virtual Gift Cards",
-      description:
-        "Send instant virtual gift cards from popular retailers. Perfect for last-minute gifts or long-distance celebrations.",
-    },
-  ];
-
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "Busy Professional",
-      quote:
-        "This app has been a lifesaver! I used to forget birthdays all the time, but now I'm always prepared with the perfect wish and gift.",
-      rating: 5,
-    },
-    {
-      name: "Michael Chen",
-      role: "Family Man",
-      quote:
-        "The custom websites feature is amazing. I created a beautiful online celebration for my daughter's 10th birthday, and our relatives loved it!",
-      rating: 5,
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Social Butterfly",
-      quote:
-        "The AI wish generator is so creative! It's helped me send unique and heartfelt messages to all my friends. Highly recommend!",
-      rating: 4,
-    },
-  ];
+  // if (isSignedIn) {
+  //   router.replace("/dashboard");
+  // }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-800">
-      {/* {showConfetti && (
-        <Confetti
-          numberOfPieces={200}
-          recycle={false}
-          onConfettiComplete={() => setShowConfetti(false)}
-        />
-      )} */}
-
+    <div>
       {/* Hero Section */}
-      <div className="container px-4 pt-20 pb-16 mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Gift className="w-16 h-16 mx-auto mb-8 text-primary" />
-          <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-primary">
-            Never Forget a Birthday Again
-          </h1>
-          <p className="max-w-2xl mx-auto mb-8 text-lg text-muted-foreground">
-            Your all-in-one birthday reminder solution with AI-powered wishes,
-            custom celebration websites, and more!
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="max-w-md mx-auto space-y-4"
-        >
-          <Input
-            type="email"
-            placeholder="Enter your email to get started"
-            className="text-center"
-          />
-          <Button
-            size="lg"
-            className="w-full"
-            onClick={() => setShowConfetti(true)}
+      <div className="min-h-dvh flex items-center justify-center px-4 pt-20 pb-16 mx-auto bg-gradient-to-br from-primary/10 to-background ">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div
+            onMouseEnter={() => {
+              confetti({
+                particleCount: 140,
+                spread: 150,
+                gravity: 0.7,
+                origin: { y: 0.6 },
+              });
+            }}
           >
-            Start Remembering Birthdays
-          </Button>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Gift className="size-12 mx-auto mb-8 text-primary" />
+              <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+                Never Forget a{" "}
+                <span className="bg-gradient-to-l from-purple-500 to-fuchsia-500 bg-clip-text text-transparent">
+                  Birthday
+                </span>{" "}
+                Again!
+              </h1>
+              <p className="max-w-2xl mx-auto mb-8 text-lg text-muted-foreground">
+                Your all-in-one birthday reminder solution with AI-powered
+                wishes, custom celebration websites, and more!
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="max-w-md space-x-4"
+            >
+              <Button size="lg">Start now!</Button>
+              <Button size="lg" variant="outline">
+                Dashboard
+              </Button>
+            </motion.div>
+          </div>
+          <Image
+            alt="Birthday Celebration"
+            src="https://ournews.bs/wp-content/uploads/2023/04/birthday-celebration.jpeg"
+            className="object-cover size-full rounded-lg"
+            width={800}
+            height={600}
+          />
+        </div>
       </div>
 
       {/* Features Grid */}
@@ -231,7 +152,7 @@ export default function LandingPage() {
           <Button
             size="lg"
             variant="secondary"
-            onClick={() => setShowConfetti(true)}
+            // onClick={() => setShowConfetti(true)}
           >
             Get Started for Free
           </Button>
