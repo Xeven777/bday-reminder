@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { File, ListFilter } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,6 +21,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import UpcomingTable from "@/components/UpcomingTable";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import ThisMonthTable from "@/components/ThisMonthTable";
+import NextMonthTable from "@/components/NextMonthTable";
 const dashboard = () => {
   return (
     <main className="grid z-10 flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 place-items-center max-w-screen-xl mx-auto ml-10">
@@ -79,7 +80,7 @@ const dashboard = () => {
             <TabsList>
               <TabsTrigger value="All">All</TabsTrigger>
               <TabsTrigger value="month">This Month</TabsTrigger>
-              <TabsTrigger value="year">Year</TabsTrigger>
+              <TabsTrigger value="nextMonth">Next Month</TabsTrigger>
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
               <DropdownMenu>
@@ -114,6 +115,20 @@ const dashboard = () => {
               fallback={<Skeleton className="w-full min-h-80 rounded-lg" />}
             >
               <UpcomingTable />
+            </Suspense>
+          </TabsContent>
+          <TabsContent value="month">
+            <Suspense
+              fallback={<Skeleton className="w-full min-h-80 rounded-lg" />}
+            >
+              <ThisMonthTable />
+            </Suspense>
+          </TabsContent>
+          <TabsContent value="nextMonth">
+            <Suspense
+              fallback={<Skeleton className="w-full min-h-80 rounded-lg" />}
+            >
+              <NextMonthTable />
             </Suspense>
           </TabsContent>
         </Tabs>
