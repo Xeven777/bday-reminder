@@ -17,6 +17,8 @@ jobs:
           bun-version: latest
 
       - name: Check and send bday wishes
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
         run: |
           bun i
           bun run check
