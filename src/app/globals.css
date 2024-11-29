@@ -187,7 +187,12 @@ layer(base);
 }
 
 .glow-text {
-  text-shadow: rgba(145, 87, 183, 0.8) 1px 2px 8px;
+  text-shadow: rgba(138, 75, 180, 0.6) 1px 1px 8px;
+  @apply transition-all duration-300 cursor-pointer;
+}
+
+.glow-text:hover {
+  text-shadow: rgba(138, 75, 180, 0.72) 1px 1px 12px;
 }
 
 .glow {

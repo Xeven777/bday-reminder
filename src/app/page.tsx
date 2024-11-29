@@ -9,6 +9,10 @@ import {
   Instagram,
   Linkedin,
 } from "lucide-react";
+import cake from "@/assets/cake.png";
+import gift1 from "@/assets/gift.png";
+import celeb from "@/assets/confettis.png";
+import poppers from "@/assets/poppers.png";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { features, testimonials } from "@/lib/data";
@@ -17,11 +21,30 @@ import confetti from "canvas-confetti";
 import Link from "next/link";
 
 export default function LandingPage() {
-
   return (
     <div>
-      {/* Hero Section */}
-      <div className="min-h-dvh flex items-center justify-center px-4 pt-20 pb-16 mx-auto bg-linear-to-br from-primary/10 to-background ">
+      <div className="h-dvh overflow-hidden flex items-center justify-center px-4 pt-20 pb-16 mx-auto bg-linear-to-t from-primary/30 to-black/20 relative">
+        <Image
+          src={celeb}
+          alt=""
+          placeholder="blur"
+          className="absolute -top-28 opacity-30 select-none left-0 w-full h-full object-cover -z-10"
+        />
+        <Image
+          src={poppers}
+          alt=""
+          placeholder="blur"
+          draggable="false"
+          className="absolute size-32 select-none top-20  rotate-12 left-48 object-cover z-10"
+        />
+        <Image
+          src={gift1}
+          alt=""
+          placeholder="blur"
+          draggable="false"
+          className="absolute size-32 select-none top-20 -rotate-12 right-48 object-cover z-10"
+        />
+        <div className="absolute h-[375px] w-[750px] sm:w-[1536px] sm:h-[768px] lg:w-[2400px] llg:h-[800px] rounded-[100%] bg-black/20 left-1/2 -translate-x-1/2 border border-primary/20 bg-[radial-gradient(closest-side,#000_82%,#9560EB)] top-[calc(100%-96px)] sm:top-[calc(100%-120px)]"></div>
         <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6 md:grid-cols-2">
           <div
             onMouseEnter={() => {
@@ -38,10 +61,9 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <Gift className="size-12 mx-auto mb-8 text-primary" />
-              <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+              <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl mt-12">
                 Never Forget a{" "}
-                <span className="bg-linear-to-l from-purple-500 to-fuchsia-500 bg-clip-text text-transparent">
+                <span className="bg-linear-to-l glow-text bric px-2 from-purple-500 to-fuchsia-500 bg-clip-text text-transparent">
                   Birthday
                 </span>{" "}
                 Again!
@@ -68,13 +90,19 @@ export default function LandingPage() {
               </Link>
             </motion.div>
           </div>
-          <Image
-            alt="Birthday Celebration"
-            src="https://ournews.bs/wp-content/uploads/2023/04/birthday-celebration.jpeg"
-            className="object-cover size-full rounded-lg"
-            width={800}
-            height={600}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <Image
+              alt="Birthday Celebration"
+              src="https://ournews.bs/wp-content/uploads/2023/04/birthday-celebration.jpeg"
+              className="object-cover size-full rounded-lg glow"
+              width={800}
+              height={600}
+            />
+          </motion.div>
         </div>
       </div>
 
