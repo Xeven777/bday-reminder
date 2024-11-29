@@ -6,6 +6,7 @@ import {
   CakeIcon,
   CakeSlice,
   ChevronsLeft,
+  LogOut,
   Settings2,
   SquareTerminal,
   Table2,
@@ -35,10 +36,10 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { useUser, UserButton } from "@clerk/nextjs";
+import { useUser, UserButton, SignOutButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import path from "path";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const navItems = [
   {
@@ -112,14 +113,21 @@ export default function RootLayout({
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/dashboard/profile/security">
-                  <div className="flex items-center gap-2 p-2">
-                    <UserButton />{" "}
-                    <span className="font-bold text-lg cursor-pointer">
-                      {user?.fullName}
-                    </span>
-                  </div>
-                </Link>
+                <div className="flex items-center gap-2 p-2 min-h-12">
+                  <UserButton />{" "}
+                  <span className="font-bold text-lg cursor-pointer">
+                    {user?.fullName}
+                  </span>
+                  <SignOutButton>
+                    <Button
+                      variant="secondary"
+                      className="ml-auto rounded-lg bg-red-900 hover:bg-red-800"
+                      size={"icon"}
+                    >
+                      <LogOut size={18} />
+                    </Button>
+                  </SignOutButton>
+                </div>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
