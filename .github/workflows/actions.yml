@@ -17,13 +17,12 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Debug ENV
-        run: |
-          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}"
-
       - name: Check and send bday wishes
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
         run: |
           bun i
           bun run check
