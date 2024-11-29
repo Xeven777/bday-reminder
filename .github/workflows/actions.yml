@@ -1,7 +1,6 @@
 name: Daily Bday Check
 
 on:
-  push:
   schedule:
     - cron: "31 18 * * *"
 

@@ -28,10 +28,11 @@ async function checkAndSendBirthdayEmails() {
   const birthdaysToday = allBirthdays.filter((birthdayPerson) => {
     const bdate = new Date(birthdayPerson.bdate);
     const bdateMonth = bdate.getUTCMonth() + 1;
-    const bdateDate = bdate.getUTCDate() + 1;
+    const bdateDate = bdate.getUTCDate();
     console.log(
       `Checking ${birthdayPerson.name} for: ${bdateMonth}-${bdateDate}`
     );
+    console.log({ bdateMonth, todayMonth, bdateDate, todayDate });
     return bdateMonth === todayMonth && bdateDate === todayDate;
   });
 
