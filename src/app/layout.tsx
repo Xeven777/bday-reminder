@@ -49,7 +49,7 @@ export default function RootLayout({
         <TooltipProvider>
           <body className={poppins.className}>
             {children}
-            <Toaster richColors theme="dark" />
+            <Toaster richColors theme="dark" closeButton />
           </body>
         </TooltipProvider>
       </html>

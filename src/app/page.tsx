@@ -171,139 +171,29 @@ export default function LandingPage() {
           <p className="mb-8 text-lg text-primary-foreground/90">
             Join thousands of users who never miss a birthday celebration
           </p>
-          <Button
-            size="lg"
-            variant="secondary"
-            // onClick={() => setShowConfetti(true)}
-          >
+          <Button size="lg" variant="secondary">
             Get Started for Free
           </Button>
         </div>
       </motion.div>
 
       {/* Footer */}
-      <footer className="bg-gray-100 dark:bg-gray-900">
+      <footer className="relative overflow-x-hidden">
+        <div className="h-px w-2/3 top-0 bg-primary -translate-x-[50%] bg-gradient-to-r from-background via-primary to-background left-1/2 absolute"></div>
         <div className="container px-4 py-12 mx-auto">
-          <div className="grid gap-8 md:grid-cols-4">
-            <div>
-              <h3 className="mb-4 text-lg font-semibold">Company</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    Press
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-4 text-lg font-semibold">Product</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    FAQ
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-4 text-lg font-semibold">Resources</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-4 text-lg font-semibold">Connect</h3>
-              <div className="flex space-x-4">
-                <a
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  <Facebook />
-                </a>
-                <a
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  <Twitter />
-                </a>
-                <a
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  <Instagram />
-                </a>
-                <a
-                  href="#"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  <Linkedin />
-                </a>
-              </div>
-            </div>
-          </div>
           <div className="mt-8 text-center text-muted-foreground">
-            <p>&copy; 2023 Birthday Reminder App. All rights reserved.</p>
+            <p>
+              &copy; 2023 Birthday Reminder App. All rights reserved. Made by{" "}
+              <a
+                href="http://anish7.me"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-purple-500"
+              >
+                Anish
+              </a>
+              ❤️
+            </p>
           </div>
         </div>
       </footer>

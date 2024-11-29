@@ -82,7 +82,7 @@ const dashboard = () => {
               <TabsTrigger value="month">This Month</TabsTrigger>
               <TabsTrigger value="nextMonth">Next Month</TabsTrigger>
             </TabsList>
-            <div className="ml-auto flex items-center gap-2">
+            {/* <div className="ml-auto flex items-center gap-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -108,7 +108,7 @@ const dashboard = () => {
                 <File className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only">Export</span>
               </Button>
-            </div>
+            </div> */}
           </div>
           <TabsContent value="All">
             <Suspense

@@ -62,7 +62,8 @@ const EditForm = (bdayinfo: { bdayid: string }) => {
     }
 
     fetchBday();
-  }, [bdayinfo.bdayid]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bdayinfo.bdayid, user?.id]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

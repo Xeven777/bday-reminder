@@ -29,6 +29,14 @@ const BdayForm = (userinfo: { userId: string }) => {
   const [tag, setTag] = useState("");
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!month) {
+      toast.error("Please fill in the birthday month");
+      return;
+    }
+    if (!tag) {
+      toast.error("Please select a tag");
+      return;
+    }
     setLoading(true);
 
     try {
