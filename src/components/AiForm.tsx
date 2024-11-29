@@ -135,7 +135,7 @@ const AiForm = () => {
           </Button>
         ) : null}
         <h2 className="p-2 font-semibold">Generated wish :</h2>
-        <div className="py-2 w-full h-full mt-4 rounded-lg border-2 border-dashed border-purple-700/40 text-sm flex items-center justify-center">
+        <div className="py-2 w-full h-full mt-4 rounded-lg border-2 border-dashed border-purple-700/40 text-sm flex items-center justify-center min-h-40">
           <p className="p-4 text-lg">
             {wish} {loading && <Loader className="animate-spin" />}
           </p>

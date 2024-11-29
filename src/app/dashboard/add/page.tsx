@@ -8,7 +8,7 @@ const Page = async () => {
   const user = (await currentUser()) as User;
   const { id } = user;
   return (
-    <div className="flex flex-wrap gap-2 justify-around mt-8 relative flex-1 w-full max-w-6xl mx-auto items-center">
+    <div className="flex flex-wrap gap-2 justify-around mt-8 relative flex-1 w-full max-w-6xl mx-auto items-center my-10">
       <BdayForm userId={id} />
 
       <div className="duration-500 transition-all w-48 h-52 rounded-full bg-purple-900 top-0 -translate-x-20 hover:top-4 hover:-translate-x-5 blur-3xl absolute" />

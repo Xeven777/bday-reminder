@@ -124,8 +124,8 @@ const ThisMonthTable = async () => {
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
-                <TableHead>Current Age</TableHead>
                 <TableHead className="text-start">Days Left</TableHead>
+                <TableHead>Current Age</TableHead>
                 <TableHead className="hidden sm:table-cell">
                   Relationship
                 </TableHead>
@@ -148,7 +148,6 @@ const ThisMonthTable = async () => {
                         {data.friendEmail}
                       </div>
                     </TableCell>
-                    <TableCell>{currentAge}</TableCell>
                     <TableCell className="text-start">
                       {daysLeft === 0
                         ? "Todayyyy🥳"
@@ -156,6 +155,7 @@ const ThisMonthTable = async () => {
                         ? "Tomorroww🤩"
                         : `${daysLeft} days`}
                     </TableCell>
+                    <TableCell>{currentAge}</TableCell>
                     <TableCell className="hidden sm:table-cell">
                       {/* @ts-ignore */}
                       <Badge className="text-sm" variant={data.tag}>
