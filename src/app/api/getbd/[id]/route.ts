@@ -10,7 +10,6 @@ export async function GET(req: Request) {
       return new NextResponse(JSON.stringify(bdayinfo), { status: 200 });
     }
   } catch (error) {
-    console.log(error);
     return new NextResponse(
       JSON.stringify({ error: "Internal server error" }),
       { status: 500 }

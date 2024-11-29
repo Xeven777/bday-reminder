@@ -73,7 +73,6 @@ export default function RootLayout({
   const pathname = usePathname();
   const currentPath = path.parse(pathname);
 
-  console.log({ pathname, currentPath });
   return (
     <SidebarProvider>
       <Sidebar collapsible="icon">

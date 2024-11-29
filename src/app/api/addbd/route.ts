@@ -5,8 +5,6 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    console.log(body);
-
     if (body.userId) {
       const bdateInfo = await prisma.bdateInfo.create({
         data: {
@@ -64,7 +62,6 @@ export async function PATCH(req: Request) {
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json();
-    console.log(id.bdayid);
 
     if (id.bdayid) {
       const message = await prisma.bdateInfo.delete({

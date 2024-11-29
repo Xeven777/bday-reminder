@@ -97,7 +97,7 @@ const UpcomingTable = async () => {
       createdAt: "desc",
     },
   });
-  console.log(allData);
+  
   const sortedData = allData.sort((a, b) => {
     const daysLeftA = calculateDaysLeft(new Date(a.bdate));
     const daysLeftB = calculateDaysLeft(new Date(b.bdate));
