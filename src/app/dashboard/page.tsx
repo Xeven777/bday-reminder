@@ -25,7 +25,7 @@ import ThisMonthTable from "@/components/ThisMonthTable";
 import NextMonthTable from "@/components/NextMonthTable";
 const dashboard = () => {
   return (
-    <main className="grid z-10 flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 place-items-center max-w-screen-xl mx-auto ml-10">
+    <main className="grid z-10 flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 place-items-center max-w-(--breakpoint-xl) mx-auto ml-10">
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2 mx-auto">
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
           <Card
@@ -61,7 +61,7 @@ const dashboard = () => {
               </Button>
             </CardFooter>
           </Card>
-          <Card className="bg-gradient-to-br from-purple-800 to-indigo-800">
+          <Card className="bg-linear-to-br from-purple-800 to-indigo-800">
             <CardHeader className="pb-2">
               <CardDescription>Create Birthday Website</CardDescription>
             </CardHeader>
