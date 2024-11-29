@@ -5,6 +5,7 @@ import { Star, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import gift1 from "@/assets/gift.png";
 import celeb from "@/assets/confettis.png";
 import poppers from "@/assets/poppers.png";
+import heropic from "@/assets/birthday-celebration.jpeg";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { features, testimonials } from "@/lib/data";
@@ -15,7 +16,7 @@ import Link from "next/link";
 export default function LandingPage() {
   return (
     <div>
-      <div className="h-dvh overflow-hidden flex items-center justify-center px-4 pt-20 pb-16 mx-auto bg-linear-to-t from-primary/30 to-black/20 relative">
+      <div className="h-lvh overflow-hidden flex items-center justify-center px-4 pt-20 pb-16 mx-auto bg-linear-to-t from-primary/30 to-black/20 relative">
         <Image
           src={celeb}
           alt=""
@@ -27,14 +28,14 @@ export default function LandingPage() {
           alt=""
           placeholder="blur"
           draggable="false"
-          className="absolute size-32 select-none top-20  rotate-12 left-48 object-cover z-10"
+          className="absolute size-32 select-none top-8 md:top-20 rotate-12 left-2 md:left-48 object-cover z-10"
         />
         <Image
           src={gift1}
           alt=""
           placeholder="blur"
           draggable="false"
-          className="absolute size-32 select-none top-20 -rotate-12 right-48 object-cover z-10 animate-swing"
+          className="absolute size-24 md:size-32 select-none top-3 md:top-20 -rotate-12 right-2 md:right-48 object-cover z-10 animate-swing"
         />
         <div className="absolute h-[375px] w-[750px] sm:w-[1536px] sm:h-[768px] lg:w-[2400px] llg:h-[800px] rounded-[100%] bg-black/20 left-1/2 -translate-x-1/2 border border-primary/20 bg-[radial-gradient(closest-side,#000_82%,#9560EB)] top-[calc(100%-96px)] sm:top-[calc(100%-120px)]"></div>
         <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -60,7 +61,7 @@ export default function LandingPage() {
                 </span>{" "}
                 Again!
               </h1>
-              <p className="max-w-2xl mx-auto mb-8 text-lg text-muted-foreground">
+              <p className="max-w-2xl mx-auto mb-8 text-base md:text-lg text-muted-foreground">
                 Your all-in-one birthday reminder solution with AI-powered
                 wishes, custom celebration websites, and more!
               </p>
@@ -89,7 +90,8 @@ export default function LandingPage() {
           >
             <Image
               alt="Birthday Celebration"
-              src="https://ournews.bs/wp-content/uploads/2023/04/birthday-celebration.jpeg"
+              src={heropic}
+              placeholder="blur"
               className="object-cover size-full rounded-2xl glow"
               width={800}
               height={600}
@@ -172,7 +174,7 @@ export default function LandingPage() {
             Join thousands of users who never miss a birthday celebration
           </p>
           <Button size="lg" variant="secondary">
-            Get Started for Free
+            <Link href="/dashboard">Get Started Now!</Link>
           </Button>
         </div>
       </motion.div>
