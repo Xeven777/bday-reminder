@@ -20,7 +20,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import UpcomingTable from "@/components/UpcomingTable";
-import { File, ListFilter } from "lucide-react";
+import { AlertCircle, File, ListFilter } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 const dashboard = () => {
@@ -73,6 +73,17 @@ const dashboard = () => {
                 <Link href={"https://wishbday.me/"}>Create website!</Link>
               </Button>
             </CardFooter>
+          </Card>
+        </div>
+        <div>
+          <Card className="md:hidden">
+            <p className="inline-flex text-xs gap-2 px-3 py-2 text-muted-foreground">
+              <span>
+                <AlertCircle className="size-4 text-[#dede22] " />
+              </span>{" "}
+              The table looks better on desktop.🖥️ Open in desktop for better
+              view & more details!
+            </p>
           </Card>
         </div>
         <Tabs defaultValue="All">

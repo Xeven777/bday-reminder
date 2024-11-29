@@ -119,7 +119,7 @@ const NextMonthTable = async () => {
         <CardDescription>Check out the upcoming Birthdays.</CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="max-w-[290px] whitespace-nowrap rounded-md sm:w-full">
+        <ScrollArea className="max-w-[290px] whitespace-nowrap rounded-md sm:max-w-full">
           <Table>
             <TableHeader>
               <TableRow>
