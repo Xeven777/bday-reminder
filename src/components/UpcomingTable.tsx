@@ -5,6 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -97,7 +98,7 @@ const UpcomingTable = async () => {
       createdAt: "desc",
     },
   });
-  
+
   const sortedData = allData.sort((a, b) => {
     const daysLeftA = calculateDaysLeft(new Date(a.bdate));
     const daysLeftB = calculateDaysLeft(new Date(b.bdate));
@@ -111,82 +112,87 @@ const UpcomingTable = async () => {
         <CardDescription>Check out the upcoming Birthdays.</CardDescription>
       </CardHeader>
       <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Current Age</TableHead>
-              <TableHead className="text-start">Days Left</TableHead>
-              <TableHead className="hidden sm:table-cell">
-                Relationship
-              </TableHead>
-              <TableHead className="hidden md:table-cell">Birth-Date</TableHead>
-              <TableHead className="hidden sm:table-cell">Autosend</TableHead>
-              <TableHead className="hidden sm:table-cell">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {sortedData.map((data) => {
-              const daysLeft = calculateDaysLeft(new Date(data.bdate));
-              const currentAge = calculateCurrentAge(new Date(data.bdate));
-              return (
-                <TableRow key={data.id}>
-                  <TableCell>
-                    <div className="font-medium text-xl">{data.name}</div>
-                    <div className="hidden text-xs text-muted-foreground md:inline">
-                      {data.friendEmail}
-                    </div>
-                  </TableCell>
-                  <TableCell>{currentAge}</TableCell>
-                  <TableCell className="text-start">
-                    {daysLeft === 0
-                      ? "Todayyyy🥳"
-                      : daysLeft === 1
-                      ? "Tomorroww🤩"
-                      : `${daysLeft} days`}
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    {/* @ts-ignore */}
-                    <Badge className="text-sm" variant={data.tag}>
-                      {data.tag}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {new Date(data.bdate).toLocaleDateString("en-IN", {
-                      timeZone: "Asia/Kolkata",
-                    })}
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    {data.autosend === true ? (
-                      <CircleCheckBig color="lime" className="ml-5" />
-                    ) : (
-                      <CircleX color="red" className="ml-5" />
-                    )}
-                  </TableCell>
-                  <TableCell className="table-cell">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant={"outline"} size={"icon"}>
-                          <Settings2 size={20} />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuItem asChild>
-                          <Link href={`/dashboard/edit?id=${data.id}`}>
-                            Edit
-                          </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="bg-destructive" asChild>
-                          <Deletebtn bdayid={data.id} />
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+        <ScrollArea className="max-w-[290px] whitespace-nowrap rounded-md sm:w-full">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Current Age</TableHead>
+                <TableHead className="text-start">Days Left</TableHead>
+                <TableHead className="hidden sm:table-cell">
+                  Relationship
+                </TableHead>
+                <TableHead className="hidden md:table-cell">
+                  Birth-Date
+                </TableHead>
+                <TableHead className="hidden sm:table-cell">Autosend</TableHead>
+                <TableHead className="hidden sm:table-cell">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {sortedData.map((data) => {
+                const daysLeft = calculateDaysLeft(new Date(data.bdate));
+                const currentAge = calculateCurrentAge(new Date(data.bdate));
+                return (
+                  <TableRow key={data.id}>
+                    <TableCell>
+                      <div className="font-medium text-xl">{data.name}</div>
+                      <div className="hidden text-xs text-muted-foreground md:inline">
+                        {data.friendEmail}
+                      </div>
+                    </TableCell>
+                    <TableCell>{currentAge}</TableCell>
+                    <TableCell className="text-start">
+                      {daysLeft === 0
+                        ? "Todayyyy🥳"
+                        : daysLeft === 1
+                        ? "Tomorroww🤩"
+                        : `${daysLeft} days`}
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      {/* @ts-ignore */}
+                      <Badge className="text-sm" variant={data.tag}>
+                        {data.tag}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {new Date(data.bdate).toLocaleDateString("en-IN", {
+                        timeZone: "Asia/Kolkata",
+                      })}
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      {data.autosend === true ? (
+                        <CircleCheckBig color="lime" className="ml-5" />
+                      ) : (
+                        <CircleX color="red" className="ml-5" />
+                      )}
+                    </TableCell>
+                    <TableCell className="table-cell">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant={"outline"} size={"icon"}>
+                            <Settings2 size={20} />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuItem asChild>
+                            <Link href={`/dashboard/edit?id=${data.id}`}>
+                              Edit
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem className="bg-destructive" asChild>
+                            <Deletebtn bdayid={data.id} />
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </CardContent>
     </Card>
   );

@@ -153,7 +153,7 @@ export default function RootLayout({
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 px-4 mb-8">{children}</div>
+        <div className="flex flex-1 flex-col gap-4 px-0 md:px-4 mb-8">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );
