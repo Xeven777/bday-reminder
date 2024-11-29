@@ -21,7 +21,7 @@ export default function LandingPage() {
   return (
     <div>
       {/* Hero Section */}
-      <div className="min-h-dvh flex items-center justify-center px-4 pt-20 pb-16 mx-auto bg-gradient-to-br from-primary/10 to-background ">
+      <div className="min-h-dvh flex items-center justify-center px-4 pt-20 pb-16 mx-auto bg-linear-to-br from-primary/10 to-background ">
         <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6 md:grid-cols-2">
           <div
             onMouseEnter={() => {
@@ -41,7 +41,7 @@ export default function LandingPage() {
               <Gift className="size-12 mx-auto mb-8 text-primary" />
               <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
                 Never Forget a{" "}
-                <span className="bg-gradient-to-l from-purple-500 to-fuchsia-500 bg-clip-text text-transparent">
+                <span className="bg-linear-to-l from-purple-500 to-fuchsia-500 bg-clip-text text-transparent">
                   Birthday
                 </span>{" "}
                 Again!
@@ -144,7 +144,7 @@ export default function LandingPage() {
         transition={{ delay: 0.6, duration: 0.5 }}
         className="container px-4 py-16 mx-auto text-center max-w-6xl"
       >
-        <div className="p-8 bg-gradient-to-b from-primary to-primary/50 rounded-2xl">
+        <div className="p-8 bg-linear-to-b from-primary to-primary/50 rounded-2xl">
           <h2 className="mb-4 text-3xl font-bold text-primary-foreground">
             Ready to Start?
           </h2>
