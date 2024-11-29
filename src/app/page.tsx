@@ -1,15 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Gift,
-  Star,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-} from "lucide-react";
-import cake from "@/assets/cake.png";
+import { Star, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import gift1 from "@/assets/gift.png";
 import celeb from "@/assets/confettis.png";
 import poppers from "@/assets/poppers.png";
@@ -42,7 +34,7 @@ export default function LandingPage() {
           alt=""
           placeholder="blur"
           draggable="false"
-          className="absolute size-32 select-none top-20 -rotate-12 right-48 object-cover z-10"
+          className="absolute size-32 select-none top-20 -rotate-12 right-48 object-cover z-10 animate-swing"
         />
         <div className="absolute h-[375px] w-[750px] sm:w-[1536px] sm:h-[768px] lg:w-[2400px] llg:h-[800px] rounded-[100%] bg-black/20 left-1/2 -translate-x-1/2 border border-primary/20 bg-[radial-gradient(closest-side,#000_82%,#9560EB)] top-[calc(100%-96px)] sm:top-[calc(100%-120px)]"></div>
         <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -98,7 +90,7 @@ export default function LandingPage() {
             <Image
               alt="Birthday Celebration"
               src="https://ournews.bs/wp-content/uploads/2023/04/birthday-celebration.jpeg"
-              className="object-cover size-full rounded-lg glow"
+              className="object-cover size-full rounded-2xl glow"
               width={800}
               height={600}
             />
