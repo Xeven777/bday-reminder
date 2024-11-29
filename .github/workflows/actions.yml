@@ -16,6 +16,10 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Debug ENV
+        run: |
+          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}"
+
       - name: Check and send bday wishes
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
