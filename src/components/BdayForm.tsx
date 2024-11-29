@@ -14,6 +14,7 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { InfoIcon } from "lucide-react";
+import confetti from "canvas-confetti";
 
 const BdayForm = (userinfo: { userId: string }) => {
   const router = useRouter();
@@ -58,6 +59,12 @@ const BdayForm = (userinfo: { userId: string }) => {
       });
       if (response.ok) {
         toast.success("Reminder added successfully");
+        confetti({
+          particleCount: 120,
+          spread: 70,
+          startVelocity: 30,
+          origin: { y: 0.6 },
+        });
         router.push("/dashboard");
       }
     } catch (error) {
