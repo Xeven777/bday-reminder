@@ -28,7 +28,7 @@ async function checkAndSendBirthdayEmails() {
   const birthdaysToday = allBirthdays.filter((birthdayPerson) => {
     const bdate = new Date(birthdayPerson.bdate);
     const bdateMonth = bdate.getUTCMonth() + 1;
-    const bdateDate = bdate.getUTCDate();
+    const bdateDate = bdate.getUTCDate() + 1; // had to do for indian timezome ;")
     console.log(
       `Checking ${birthdayPerson.name} for: ${bdateMonth}-${bdateDate}`
     );
