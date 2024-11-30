@@ -32,7 +32,6 @@ async function checkAndSendBirthdayEmails() {
     console.log(
       `Checking ${birthdayPerson.name} for: ${bdateMonth}-${bdateDate}`
     );
-    console.log({ bdateMonth, todayMonth, bdateDate, todayDate });
     return bdateMonth === todayMonth && bdateDate === todayDate;
   });
 
