@@ -29,7 +29,9 @@ import Link from "next/link";
 import Deletebtn from "./Deletebtn";
 
 const calculateDaysLeft = (birthdate: Date): number => {
-  const currentDate = new Date();
+  const currentDate = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
   const currentYear = currentDate.getFullYear();
   const nextBirthday = new Date(
     currentYear,
@@ -57,7 +59,9 @@ const calculateDaysLeft = (birthdate: Date): number => {
 };
 
 const calculateCurrentAge = (birthdate: Date): string => {
-  const currentDate = new Date();
+  const currentDate = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
   const birthYear = birthdate.getFullYear();
   let ageInYears = currentDate.getFullYear() - birthYear;
 
