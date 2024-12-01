@@ -103,7 +103,8 @@ const NextMonthTable = async () => {
 
   const filteredData = allData.filter((data) => {
     const birthdate = new Date(data.bdate);
-    return birthdate.getMonth() === currentMonth + 1;
+    const nextMonth = (currentMonth + 1) % 12;
+    return birthdate.getMonth() === nextMonth;
   });
 
   const sortedData = filteredData.sort((a, b) => {
