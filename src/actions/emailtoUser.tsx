@@ -28,7 +28,7 @@ const BirthdayWishEmail = ({ name }: { name: string }) => {
             <Heading style={heading3}>
               Dont forget to wish him! Send this custom animated birthday
               website to them:
-              <Link href="https://wishbday.me" style={link}>
+              <Link href="https://happppyy-bday.vercel.app/" style={link}>
                 THISS!
               </Link>
             </Heading>
@@ -49,9 +49,9 @@ const BirthdayWishEmail = ({ name }: { name: string }) => {
                   color: "#d416ff",
                   textDecoration: "none",
                 }}
-                href="https://bday-reminder-iota.vercel.app/"
+                href="https://bday-reminder7.vercel.app/"
               >
-                https://bday-reminder-iota.vercel.app/
+                Bday Reminder App
               </Link>
             </Text>
             <Text style={footerText}>Phone: +91 9163300481</Text>

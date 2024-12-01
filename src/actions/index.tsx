@@ -42,7 +42,8 @@ const BirthdayEmail = ({
             things. 🎂✨
           </Text>
           <Text style={paragraph}>
-            On your special day and always, may your heart be filled with joy! 🎉
+            On your special day and always, may your heart be filled with joy!
+            🎉
           </Text>
           <Text style={paragraph}>Best wishes,</Text>
           <Text style={paragraph}>{senderName}</Text>
@@ -56,7 +57,7 @@ const BirthdayEmail = ({
         <Section style={footerSection}>
           <Text style={footerText}>
             Sent via{" "}
-            <Link href="https://bday-reminder-iota.vercel.app/" style={link}>
+            <Link href="https://bday-reminder7.vercel.app/" style={link}>
               Birthday Reminder
             </Link>
           </Text>
