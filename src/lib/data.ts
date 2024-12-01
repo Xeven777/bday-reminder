@@ -8,6 +8,7 @@ import {
   Bell,
   Cake,
 } from "lucide-react";
+import { Bricolage_Grotesque, Poppins } from "next/font/google";
 
 export const features = [
   {
@@ -59,3 +60,13 @@ export const testimonials = [
     rating: 4,
   },
 ];
+
+export const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["200", "400", "500", "600", "700"],
+});
+
+export const bric = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: ["800"],
+});

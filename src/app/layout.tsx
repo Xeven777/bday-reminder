@@ -1,15 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import { dark } from "@clerk/themes";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["200", "400", "500", "600", "700"],
-});
+import { poppins } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Birthday Reminder",

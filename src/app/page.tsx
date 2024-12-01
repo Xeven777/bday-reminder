@@ -8,10 +8,11 @@ import poppers from "@/assets/poppers.png";
 import heropic from "@/assets/birthday-celebration.jpeg";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { features, testimonials } from "@/lib/data";
+import { bric, features, testimonials } from "@/lib/data";
 import Image from "next/image";
 import confetti from "canvas-confetti";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function LandingPage() {
   return (
@@ -56,7 +57,12 @@ export default function LandingPage() {
             >
               <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl mt-12">
                 Never Forget a{" "}
-                <span className="bg-linear-to-l glow-text bric px-2 from-purple-500 to-fuchsia-500 bg-clip-text text-transparent">
+                <span
+                  className={cn(
+                    "bg-linear-to-l glow-text px-2 from-purple-500 to-fuchsia-500 bg-clip-text text-transparent",
+                    bric.className
+                  )}
+                >
                   Birthday
                 </span>{" "}
                 Again!

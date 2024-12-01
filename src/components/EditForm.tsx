@@ -16,6 +16,8 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { InfoIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { bric } from "@/lib/data";
 
 const EditForm = (bdayinfo: { bdayid: string }) => {
   const router = useRouter();
@@ -99,7 +101,7 @@ const EditForm = (bdayinfo: { bdayid: string }) => {
   }
   return (
     <div className="z-20 w-full max-w-md rounded-lg bg-card p-6 shadow-purple-800/30 transition-all shadow-inner glow-card">
-      <h1 className="bric mb-4 text-3xl font-bold glow-d">
+      <h1 className={cn("mb-4 text-3xl font-bold glow-d", bric.className)}>
         Edit Birthday Reminder
       </h1>
       <form className="space-y-5" onSubmit={(e) => handleSubmit(e)}>
