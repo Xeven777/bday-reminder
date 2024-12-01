@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 async function checkAndSendBirthdayEmails() {
   const today = new Date();
   const todayMonth = today.getUTCMonth() + 1;
-  const todayDate = today.getUTCDate();
+  const todayDate = today.getUTCDate() + 1; // had to do for indian timezome ;") 
 
   console.log(`Checking birthdays for: ${todayMonth}-${todayDate}`);
 
