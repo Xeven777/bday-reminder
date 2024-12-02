@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 async function checkAndSendBirthdayEmails() {
   const today = new Date();
   const todayMonth = today.getUTCMonth() + 1;
-  const todayDate = today.getUTCDate() + 1; // had to do for indian timezome ;") 
+  const todayDate = today.getUTCDate() + 1; // had to do for indian timezome ;")
 
   console.log(`Checking birthdays for: ${todayMonth}-${todayDate}`);
 
@@ -39,17 +39,17 @@ async function checkAndSendBirthdayEmails() {
   const sendPromises = birthdaysToday.map(async (birthdayPerson) => {
     console.log(`Sending birthday email to ${birthdayPerson.name}...`);
 
-    if (birthdayPerson.friendEmail) {
-      const userdetails = await logUsers(birthdayPerson.userId);
-      if (!userdetails) {
-        console.error("User not found");
-        return;
-      }
-      const fullName = userdetails.fullName || "A Good Guy";
-      const userEmail = userdetails.senderEmail;
-      await send(birthdayPerson.name, birthdayPerson.friendEmail, fullName);
-      await sendToUser(birthdayPerson.name, userEmail);
+    const userdetails = await logUsers(birthdayPerson.userId);
+    if (!userdetails) {
+      console.error("User not found");
+      return;
     }
+    const fullName = userdetails.fullName || "A Good Guy";
+    const userEmail = userdetails.senderEmail;
+    if (birthdayPerson.friendEmail) {
+      await send(birthdayPerson.name, birthdayPerson.friendEmail, fullName);
+    }
+    await sendToUser(birthdayPerson.name, userEmail);
   });
   await Promise.all(sendPromises);
 
