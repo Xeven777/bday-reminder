@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "postinstall": "prisma generate",
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "email": "email dev",
     "check": "bun run ./src/actions/sendEmail.ts",
     "studio": "bun x prisma studio",

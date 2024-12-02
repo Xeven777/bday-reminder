@@ -29,9 +29,7 @@ import Deletebtn from "./Deletebtn";
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 
 const calculateDaysLeft = (birthdate: Date): number => {
-  const currentDate = new Date(
-    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
-  );
+  const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const nextBirthday = new Date(
     currentYear,
@@ -59,9 +57,7 @@ const calculateDaysLeft = (birthdate: Date): number => {
 };
 
 const calculateCurrentAge = (birthdate: Date): string => {
-  const currentDate = new Date(
-    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
-  );
+  const currentDate = new Date();
   const birthYear = birthdate.getFullYear();
   let ageInYears = currentDate.getFullYear() - birthYear;
 
