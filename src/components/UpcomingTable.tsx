@@ -29,13 +29,19 @@ import Link from "next/link";
 import Deletebtn from "./Deletebtn";
 
 const calculateDaysLeft = (birthdate: Date): number => {
-  const currentDate = new Date();
-  console.log({ currentDate });
+  const currentDate = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
+  const birthdateInTimezone = new Date(
+    birthdate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
   const currentYear = currentDate.getFullYear();
   const nextBirthday = new Date(
     currentYear,
-    birthdate.getMonth(),
-    birthdate.getDate()
+    birthdateInTimezone.getMonth(),
+    birthdateInTimezone.getDate()
   );
 
   if (
@@ -58,15 +64,21 @@ const calculateDaysLeft = (birthdate: Date): number => {
 };
 
 const calculateCurrentAge = (birthdate: Date): string => {
-  const currentDate = new Date();
-  console.log({ currentDate });
-  const birthYear = birthdate.getFullYear();
+  const currentDate = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
+  const birthdateInTimezone = new Date(
+    birthdate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
+  const birthYear = birthdateInTimezone.getFullYear();
   let ageInYears = currentDate.getFullYear() - birthYear;
 
   const nextBirthday = new Date(
     currentDate.getFullYear(),
-    birthdate.getMonth(),
-    birthdate.getDate()
+    birthdateInTimezone.getMonth(),
+    birthdateInTimezone.getDate()
   );
   if (currentDate < nextBirthday) {
     ageInYears--;
@@ -96,9 +108,6 @@ const UpcomingTable = async () => {
 
   const allData = await prisma.bdateInfo.findMany({
     where: { userId },
-    orderBy: {
-      createdAt: "desc",
-    },
   });
 
   const sortedData = allData.sort((a, b) => {
