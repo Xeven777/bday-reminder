@@ -30,6 +30,7 @@ import Deletebtn from "./Deletebtn";
 
 const calculateDaysLeft = (birthdate: Date): number => {
   const currentDate = new Date();
+  console.log({ currentDate });
   const currentYear = currentDate.getFullYear();
   const nextBirthday = new Date(
     currentYear,
@@ -58,6 +59,7 @@ const calculateDaysLeft = (birthdate: Date): number => {
 
 const calculateCurrentAge = (birthdate: Date): string => {
   const currentDate = new Date();
+  console.log({ currentDate });
   const birthYear = birthdate.getFullYear();
   let ageInYears = currentDate.getFullYear() - birthYear;
 
