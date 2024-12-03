@@ -29,12 +29,18 @@ import Deletebtn from "./Deletebtn";
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 
 const calculateDaysLeft = (birthdate: Date): number => {
-  const currentDate = new Date();
+  const currentDate = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+  const birthdateInTimezone = new Date(
+    birthdate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
   const currentYear = currentDate.getFullYear();
   const nextBirthday = new Date(
     currentYear,
-    birthdate.getMonth(),
-    birthdate.getDate()
+    birthdateInTimezone.getMonth(),
+    birthdateInTimezone.getDate()
   );
 
   if (
@@ -57,14 +63,20 @@ const calculateDaysLeft = (birthdate: Date): number => {
 };
 
 const calculateCurrentAge = (birthdate: Date): string => {
-  const currentDate = new Date();
-  const birthYear = birthdate.getFullYear();
+  const currentDate = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+  const birthdateInTimezone = new Date(
+    birthdate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
+  const birthYear = birthdateInTimezone.getFullYear();
   let ageInYears = currentDate.getFullYear() - birthYear;
 
   const nextBirthday = new Date(
     currentDate.getFullYear(),
-    birthdate.getMonth(),
-    birthdate.getDate()
+    birthdateInTimezone.getMonth(),
+    birthdateInTimezone.getDate()
   );
   if (currentDate < nextBirthday) {
     ageInYears--;
@@ -74,8 +86,8 @@ const calculateCurrentAge = (birthdate: Date): string => {
     (currentDate.getTime() -
       new Date(
         currentDate.getFullYear(),
-        birthdate.getMonth(),
-        birthdate.getDate()
+        birthdateInTimezone.getMonth(),
+        birthdateInTimezone.getDate()
       ).getTime()) /
     (1000 * 60 * 60 * 24);
   const daysSince = Math.floor(daysSinceLastBirthday);
@@ -99,12 +111,17 @@ const NextMonthTable = async () => {
     },
   });
 
-  const currentMonth = new Date().getMonth();
+  const currentDate = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+  const nextMonth = (currentDate.getMonth() + 1) % 12;
 
   const filteredData = allData.filter((data) => {
     const birthdate = new Date(data.bdate);
-    const nextMonth = (currentMonth + 1) % 12;
-    return birthdate.getMonth() === nextMonth;
+    const birthdateInTimezone = new Date(
+      birthdate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+    );
+    return birthdateInTimezone.getMonth() === nextMonth;
   });
 
   const sortedData = filteredData.sort((a, b) => {
