@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Star } from "lucide-react";
 import gift1 from "@/assets/gift.png";
 import celeb from "@/assets/confettis.png";
 import poppers from "@/assets/poppers.png";
