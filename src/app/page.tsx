@@ -38,7 +38,7 @@ export default function LandingPage() {
           draggable="false"
           className="absolute size-24 md:size-32 select-none top-3 md:top-20 -rotate-12 right-2 md:right-48 object-cover z-10 animate-swing"
         />
-        <div className="absolute h-[375px] w-[750px] sm:w-[1536px] sm:h-[768px] lg:w-[2400px] llg:h-[800px] rounded-[100%] bg-black/20 left-1/2 -translate-x-1/2 border border-primary/20 bg-[radial-gradient(closest-side,#000_82%,#9560EB)] top-[calc(100%-96px)] sm:top-[calc(100%-120px)]"></div>
+        <div className="absolute h-[375px] w-[750px] sm:w-[1536px] sm:h-[768px] lg:w-[2400px] rounded-[100%] bg-black/20 left-1/2 -translate-x-1/2 border border-primary/20 bg-[radial-gradient(closest-side,#000_82%,#9560EB)] top-[calc(100%-96px)] sm:top-[calc(100%-120px)]"></div>
         <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6 md:grid-cols-2">
           <div
             onMouseEnter={() => {

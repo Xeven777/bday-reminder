@@ -14,8 +14,6 @@ async function checkAndSendBirthdayEmails() {
   const todayMonth = today.getUTCMonth() + 1;
   const todayDate = today.getUTCDate() + 1; // had to do for indian timezome ;")
 
-  console.log(`Checking birthdays for: ${todayMonth}-${todayDate}`);
-
   const allBirthdays = await prisma.bdateInfo.findMany({
     select: {
       userId: true,
@@ -29,16 +27,10 @@ async function checkAndSendBirthdayEmails() {
     const bdate = new Date(birthdayPerson.bdate);
     const bdateMonth = bdate.getUTCMonth() + 1;
     const bdateDate = bdate.getUTCDate() + 1; // had to do for indian timezome ;")
-    console.log(
-      `Checking ${birthdayPerson.name} for: ${bdateMonth}-${bdateDate}`
-    );
     return bdateMonth === todayMonth && bdateDate === todayDate;
   });
 
-  console.log("Birthdays today:", birthdaysToday);
   const sendPromises = birthdaysToday.map(async (birthdayPerson) => {
-    console.log(`Sending birthday email to ${birthdayPerson.name}...`);
-
     const userdetails = await logUsers(birthdayPerson.userId);
     if (!userdetails) {
       console.error("User not found");
