@@ -62,13 +62,13 @@ lib-->data;
 
 To run the project locally:
 
-* Git clone the repository: https://github.com/abhraneeldhar7/bday-reminder.git
-* Install dependencies: `npm install` or `yarn install`
+* Git clone the repository: https://github.com/xeven777/bday-reminder.git
+* Install dependencies: `pnpm install` or `bun install`
 * Set up environment variables:
 + Clerk API keys
 + Prisma database URL
 + Resend email API keys
-* Run the application: `npm run dev` or `yarn dev`
+* Run the application: `pnpm run dev` or `bun dev`
 * Access the application at http://localhost:3000
 
 ## Contributing
