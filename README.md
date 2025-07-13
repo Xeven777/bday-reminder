@@ -2,39 +2,74 @@
 
 ![ss](src/app/opengraph-image.jpg)
 
-## Description
+## 🗂️ Description
 
-Birthday Reminder is a simple application that helps you keep track of your friends' and family members' birthdays. It sends you notifications so you never miss an important date.
+The bday-reminder repository is a birthday reminder application built with Next.js, Prisma, and Clerk. This project allows users to manage birthday reminders, generate AI-powered birthday wishes, and send automated emails to friends and users. The application features a user dashboard for adding, editing, and deleting birthday reminders, as well as a landing page with a hero section, features grid, and testimonials.
 
-## Features
+The application uses Clerk for authentication and authorization, ensuring that only authorized users can access and manage their birthday reminders. The project also utilizes Prisma to interact with a MongoDB database, storing birthday reminder data and user information.
 
-- Add, edit, and delete birthday entries
-- Receive notifications for upcoming birthdays
-- View a list of all saved birthdays
+## ✨ Key Features
 
-## Installation
+### **User Management**
 
-1. Clone the repository:
+* User authentication and authorization with Clerk
+* User dashboard for managing birthday reminders
 
-```bash
-git clone https://github.com/Xeven777/bday-reminder.git
+### **Birthday Reminders**
+
+* Add, edit, and delete birthday reminders
+* Display upcoming birthdays in a table format
+* Generate AI-powered birthday wishes
+* Receive notifications for upcoming birthdays
+* View a list of all saved birthdays
+
+### **Email Functionality**
+
+* Automated email sending to friends and users on birthdays
+* Customizable email templates
+
+### **AI-powered Features**
+
+* Generate birthday wishes using Google Gemini model
+
+## 🗂️ Folder Structure
+```mermaid
+graph TD;
+src-->actions;
+src-->app;
+app-->api;
+app-->dashboard;
+app-->layout;
+src-->components;
+src-->lib;
+lib-->utils;
+lib-->db;
+lib-->data;
 ```
 
-2. Install the dependencies:
+## 🛠️ Tech Stack
 
-```bash
-npm install
-```
+* Next.js
+* Prisma
+* Clerk
+* React
+* Tailwind CSS
+* Google Gemini (AI library)
+* Resend (email library)
+* @react-email/components (email templates)
 
-3. Start the application:
+## ⚙️ Setup Instructions
 
-```bash
-npm run dev
-```
+To run the project locally:
 
-## Usage
-
-To use the application, navigate to `http://localhost:3000` in your web browser.
+* Git clone the repository: https://github.com/abhraneeldhar7/bday-reminder.git
+* Install dependencies: `npm install` or `yarn install`
+* Set up environment variables:
++ Clerk API keys
++ Prisma database URL
++ Resend email API keys
+* Run the application: `npm run dev` or `yarn dev`
+* Access the application at http://localhost:3000
 
 ## Contributing
 
